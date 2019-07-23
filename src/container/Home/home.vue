@@ -71,6 +71,7 @@
 			display:flex;
 			align-items: center;
 			.service{
+				font-size: 14px;
 				margin-right: 24px;
 			}
 			.username{
