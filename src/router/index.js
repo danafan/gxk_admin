@@ -14,6 +14,7 @@ const taskList = resolve=>require(['@/container/Task/taskList'],resolve)
 const taskTemplate = resolve=>require(['@/container/Task/taskTemplate'],resolve)
 const createTask = resolve=>require(['@/container/Task/createTask'],resolve)
 const merchantList = resolve=>require(['@/container/Merchants/merchantList'],resolve)
+const merchantDetail = resolve=>require(['@/container/Merchants/merchantDetail'],resolve)
 const moneyRecord = resolve=>require(['@/container/Merchants/moneyRecord'],resolve)
 const merchantTopup = resolve=>require(['@/container/Merchants/merchantTopup'],resolve)
 const storeList = resolve=>require(['@/container/Merchants/storeList'],resolve)
@@ -50,6 +51,7 @@ const router = new Router({
     { path: '/taskTemplate',name:"任务模版", component: taskTemplate},
     { path: '/createTask',name:"创建任务", component: createTask},
     { path: '/merchantList',name:"商家列表", component: merchantList},
+    { path: '/merchantDetail',name:"商家详情", component: merchantDetail},
     { path: '/moneyRecord',name:"商家资金记录", component: moneyRecord},
     { path: '/merchantTopup',name:"商家充值", component: merchantTopup},
     { path: '/storeList',name:"店铺列表", component: storeList},
