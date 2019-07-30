@@ -31,7 +31,7 @@
 					</el-submenu>
 				</el-menu>
 			</el-aside>
-			<el-main>
+			<el-main class="main">
 				<el-card>
 					<el-breadcrumb separator="/">
 						<el-breadcrumb-item v-for="item in levelList">{{item.name}}</el-breadcrumb-item>
@@ -98,6 +98,10 @@
 	}
 	.el-menu{
 		border: none !important;
+	}
+	.main{
+		height: 100%;
+		overflow-y: scroll;
 	}
 }
 </style>

@@ -8,7 +8,7 @@ const instance = axios.create({
 
 instance.interceptors.response.use(function (response) {
   switch (response.data.code) {
-    case 10000:
+    case 400:
     router.replace("/login");
   }
   return response;

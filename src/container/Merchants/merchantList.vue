@@ -41,7 +41,7 @@
 			</el-table-column>
 			<el-table-column prop="add_time" label="创建时间" align="center">
 			</el-table-column>
-			<el-table-column label="编辑" align="center">
+			<el-table-column label="操作" align="center">
 				<template slot-scope="scope">
 					<el-button type="text" size="small" @click="$router.push('/merchantDetail?id=' + scope.row.store_id)">编辑</el-button>
 					<el-button v-if="scope.row.status == 0" type="text" size="small" @click="setting(scope.row.store_id,'开启')">开启</el-button>
