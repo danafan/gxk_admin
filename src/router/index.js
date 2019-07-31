@@ -7,6 +7,7 @@ const index = resolve=>require(['@/container/Index/index'],resolve)
 const platformRecord = resolve=>require(['@/container/Financial/platformRecord'],resolve)
 const withdrawal = resolve=>require(['@/container/Financial/withdrawal'],resolve)
 const userList = resolve=>require(['@/container/User/userList'],resolve)
+const userDetail = resolve=>require(['@/container/User/userDetail'],resolve)
 const identity = resolve=>require(['@/container/User/identity'],resolve)
 const wangwang = resolve=>require(['@/container/User/wangwang'],resolve)
 const bankCard = resolve=>require(['@/container/User/bankCard'],resolve)
@@ -44,6 +45,7 @@ const router = new Router({
     { path: '/platformRecord',name:"资金记录", component: platformRecord},
     { path: '/withdrawal',name:"提现记录", component: withdrawal},
     { path: '/userList',name:"用户列表", component: userList},
+    { path: '/userDetail',name:"用户详情", component: userDetail},
     { path: '/identity',name:"身份审核", component: identity},
     { path: '/wangwang',name:"旺旺号审核", component: wangwang},
     { path: '/bankCard',name:"银行卡审核", component: bankCard},

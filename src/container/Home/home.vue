@@ -175,7 +175,7 @@
 					resource.loginOut().then(res => {
 						if(res.data.code == 1){
 							sessionStorage.clear();
-							this.$message.warning(res.data.msg);
+							this.$message.success(res.data.msg);
 							this.$router.push('/login');
 						}else{
 							this.$message.warning(res.data.msg);
