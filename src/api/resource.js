@@ -87,7 +87,7 @@ let path = {
 	accessList:'access/getaccesslist',						//权限列表
 	controllers:'system/getcontrollers',					//所有控制器
 	getMethods:'system/getmethods',							//控制器下所有方法
-	getMenuList:'menu/getmainmenus',						//获取所有菜单
+	getMenuList2:'menu/getmainmenus',						//获取所有菜单
 	addAccess:'access/addaccess',							//添加权限
 	getAccessList:'access/accesslist',						//权限列表（展示使用）
 	getAdminDetail:'admin/getadmininfo',					//获取管理员信息
@@ -394,7 +394,7 @@ export default{
 		return http.post(path.addAdmin, params)
 	},
 	//管理员修改
-	 updateAdmin(params){
+	updateAdmin(params){
 		return http.post(path.updateAdmin, params)
 	},
 	//管理员列表
@@ -498,8 +498,8 @@ export default{
 		return http.get(path.deleteAccess, params)
 	},
 	//我的菜单列表
-	getMenuList(params){
-		return http.get(path.getMenuList, params)
+	getMenuList2(params){
+		return http.get(path.getMenuList2, params)
 	},
 }
 
