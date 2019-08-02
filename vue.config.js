@@ -7,5 +7,6 @@ module.exports = {
 				changOrigin: true,		//是否跨域
 			}
 		}
-	}
+	},
+	assetsDir: "admin"
 }

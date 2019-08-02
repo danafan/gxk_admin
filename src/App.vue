@@ -17,12 +17,9 @@
       }
     },
     created(){
-      let admin_name = sessionStorage.getItem("admin_name");
-      if(!admin_name){
-        this.$router.push('/login');
-        this.$message.warning("用户未登录")
-      }else{
-        this.$router.push('/home');
+      let tab = sessionStorage.getItem("tab");
+      if(!tab || tab == '/'){
+        this.$router.push('/index')
       }
     },
     methods: {

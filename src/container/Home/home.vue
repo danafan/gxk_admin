@@ -4,7 +4,6 @@
 			<el-header class="header">
 				<div class="gxk">共享客</div>
 				<div class="headerRight">
-					<div class="service">消息中心：1</div>
 					<div class="username">{{admin_name}}</div>
 					<div class="line"></div>
 					<div class="tui" @click="exit">退出</div>
@@ -120,17 +119,29 @@
 			this.admin_name = sessionStorage.getItem("admin_name");
 			//获取我的菜单列表
 			this.getMenuList();
-		},	
-		watch:{
-			$route(n){
-				sessionStorage.setItem("tab",n);
-				this.handleSelect(this.activeIndex);
-				this.levelList = this.$route.matched.filter(item=>item.name)
+			let tab = sessionStorage.getItem("tab");
+			if(!tab){
+				this.activeIndex = '/index';
+				// this.$router.push('/store')
+			}else{
+				if(tab == '/userDetail'){
+					this.activeIndex = '/userList';
+				}else{
+					this.activeIndex = tab;
+				}
+				// this.$router.push(tab);
 			}
-		},
+		},	
+		// watch:{
+		// 	$route(n){
+		// 		sessionStorage.setItem("tab",n);
+		// 		this.handleSelect(this.activeIndex);
+		// 		this.levelList = this.$route.matched.filter(item=>item.name)
+		// 	}
+		// },
 		methods:{
 			handleSelect(index){
-				sessionStorage.setItem("tab",index);
+				// sessionStorage.setItem("tab",index);
 				this.activeIndex = index;
 			},
 			//获取我的菜单列表

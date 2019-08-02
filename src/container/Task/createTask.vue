@@ -95,7 +95,9 @@
 					</div>
 					<div class="temRow">
 						<div class="temLabel">用户接任务间隔时间</div>
-						<div class="temContent">{{req.user_task_time}}</div>
+						<div class="temContent" v-if="timeType == 1">{{req.user_task_time}}秒</div>
+						<div class="temContent" v-if="timeType == 60">{{req.user_task_time/60}}分钟</div>
+						<div class="temContent" v-if="timeType == 3600">{{req.user_task_time/3600}}小时</div>
 					</div>
 					<div class="temRow">
 						<div class="temLabel">任务可见商家</div>
@@ -108,6 +110,24 @@
 					<div class="temRow">
 						<div class="temLabel">服务费（元）</div>
 						<div class="temContent">{{detailServiceList.join(',')}}</div>
+					</div>
+				</div>
+				<div class="tabList">
+					<div class="tabTitle1">
+						<div class="title">步骤名称</div>
+						<div class="title">佣金（元）</div>
+						<div class="title">上级分佣（元）</div>
+						<div class="title">显示下一步骤时间</div>
+						<div class="title">审核方式</div>
+						<div class="title">截图</div>
+					</div>
+					<div class="tabRow" v-for="item in processedStep">
+						<div class="con rowLabel">{{item.title}}</div>
+						<div class="con">{{item.stepInfo[0].value}}</div>
+						<div class="con">{{item.stepInfo[4].value}}</div>
+						<div class="con">{{item.stepInfo[2].value/item.stepInfo[2].time}}{{item.stepInfo[2].time == 1?'秒':item.stepInfo[2].time == 60?'分钟':'小时'}}</div>
+						<div class="con">{{item.stepInfo[1].list[parseInt(item.stepInfo[1].value)].name}}</div>
+						<div class="con">{{item.stepInfo[3].list[parseInt(item.stepInfo[3].value)].name}}</div>
 					</div>
 				</div>
 				<div class="buts">
@@ -200,6 +220,43 @@
 			align-items: center;
 			justify-content: center;
 			font-size: 14px;
+		}
+	}
+}
+.tabList{
+	margin-top: 20px;
+	border-left: 1px solid #ccc;
+	.tabTitle1{
+		display:flex;
+		.title{
+			border-bottom: 1px solid #ccc;
+			border-top: 1px solid #ccc;
+			border-right: 1px solid #ccc;
+			width: 180px;
+			height: 34px;
+			background: #f5f5f5;
+			display:flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 14px;
+			font-weight: bold;
+		}
+	}
+	.tabRow{
+		display:flex;
+		.con{
+			border-bottom: 1px solid #ccc;
+			border-top: 1px solid #ccc;
+			border-right: 1px solid #ccc;
+			width: 180px;
+			height: 34px;
+			display:flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 14px;
+		}
+		.rowLabel{
+			background: #f5f5f5;
 		}
 	}
 }

@@ -46,7 +46,9 @@
 			</el-table-column>
 			<el-table-column label="操作" align="center">
 				<template slot-scope="scope">
-					<el-button type="text" size="small" @click="updateNum(scope.row.wangwang,scope.row.id)">修改接单数</el-button>
+					<el-button v-if="scope.row.status == 1" type="text" size="small" @click="updateNum(scope.row.wangwang,scope.row.id)">修改接单数</el-button>
+					<el-button v-if="scope.row.status == 0" type="text" size="small" @click="check(scope.row.id,'1')">通过</el-button>
+					<el-button v-if="scope.row.status == 0" type="text" size="small" @click="check(scope.row.id,'2')">拒绝</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -194,6 +196,29 @@
 						this.$message.warning(res.data.msg);
 					}
 				})
+			},
+			//审核
+			check(id,status){
+				this.$confirm(`确认${status == '1'?'通过':'拒绝'}?`, '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
+					resource.checkWang({id:id,check_status:status}).then(res => {
+						if(res.data.code == 1){
+							this.$message.success(res.data.msg);
+							//获取列表
+							this.getList();
+						}else{
+							this.$message.warning(res.data.msg);
+						}
+					})
+				}).catch(() => {
+					this.$message({
+						type: 'info',
+						message: '取消退出'
+					});          
+				});
 			}
 			
 		}

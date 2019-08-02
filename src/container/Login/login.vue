@@ -88,7 +88,7 @@
 						if(res.data.code == '1'){
 							sessionStorage.setItem("admin_name",res.data.data.admin_name);
 							this.$message.success("登录成功");
-							this.$router.push('/home');
+							this.$router.push('/index');
 						}else{
 							this.$message.warning(res.data.msg);
 						}

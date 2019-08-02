@@ -250,9 +250,9 @@
 			},
 			//提交审核
 			submitCheck(){
-				resource.withdrawCheck(this.checkReq).then(res => {
+				resource.rechargeCheck(this.checkReq).then(res => {
 					if(res.data.code == 1){
-						this.$message.warning(res.data.msg);
+						this.$message.success(res.data.msg);
 						this.showDialog = false;
 						this.reload();
 					}else{
