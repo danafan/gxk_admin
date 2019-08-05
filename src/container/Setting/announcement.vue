@@ -47,12 +47,12 @@
 					<div style="font-size: 12px">名称只作为辨别多个条目之用</div>
 				</div>
 			</el-form-item>
-			<el-form-item label="开始时间：" required>
-				<el-date-picker v-model="objReq.start_datetime" value-format="yyyy-MM-dd hh:mm:ss" type="datetime" placeholder="选择开始时间">
+			<el-form-item label="开始时间：">
+				<el-date-picker v-model="objReq.start_datetime" value-format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择开始时间">
 				</el-date-picker>
 			</el-form-item>
-			<el-form-item label="结束时间：" required>
-				<el-date-picker v-model="objReq.end_datetime" value-format="yyyy-MM-dd hh:mm:ss" type="datetime" placeholder="选择结束时间">
+			<el-form-item label="结束时间：">
+				<el-date-picker v-model="objReq.end_datetime" value-format="yyyy-MM-dd HH:mm:ss" type="datetime" placeholder="选择结束时间">
 				</el-date-picker>
 			</el-form-item>
 			<el-form-item label="公告标题：" required>
@@ -63,7 +63,7 @@
 			<el-form-item label="公告内容：" required>
 				<div>
 					<el-input v-model="objReq.content" type="textarea"
-					:rows="3" style="width: 200px" size="small" placeholder="输入公告标题"></el-input>
+					:rows="3" style="width: 200px" size="small" placeholder="输入公告内容"></el-input>
 				</div>
 			</el-form-item>
 		</el-form>
@@ -159,10 +159,8 @@
 			submit(){
 				if(this.objReq.name == ""){
 					this.$message.warning('请输入公告名称');
-				}else if(this.objReq.start_datetime == ""){
-					this.$message.warning('请输入开始时间');
-				}else if(this.objReq.end_datetime == ""){
-					this.$message.warning('请输入结束时间');
+				}else if(new Date(this.objReq.start_datetime).getTime() > new Date(this.objReq.end_datetime).getTime()){
+					this.$message.warning('开始时间不能大于结束时间');
 				}else if(this.objReq.title == ""){
 					this.$message.warning('请输入公告标题');
 				}else if(this.objReq.content == ""){

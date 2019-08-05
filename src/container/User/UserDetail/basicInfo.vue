@@ -85,8 +85,9 @@
 			</el-table-column>
 			<el-table-column prop="job" label="操作" align="center">
 				<template slot-scope="scope">
-					<el-button type="text" size="small" @click="checkWang(scope.row.id,'1')">通过</el-button>
-					<el-button type="text" size="small" @click="checkWang(scope.row.id,'2')">拒绝</el-button>
+					<el-button type="text" v-if="scope.row.status == 0" size="small" @click="checkWang(scope.row.id,'1')">通过</el-button>
+					<el-button type="text" v-if="scope.row.status == 0" size="small" @click="checkWang(scope.row.id,'2')">拒绝</el-button>
+					<el-button type="text" v-if="scope.row.status == 1" size="small" @click="updateNum(scope.row.wangwang,scope.row.id)">修改接单数</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -97,6 +98,29 @@
 					<img class="cardimg" :src="item">
 				</el-carousel-item>
 			</el-carousel>
+		</el-dialog>
+		<!-- 修改接单数 -->
+		<el-dialog title="修改接单数" width="30%" center :visible.sync="showDialog">
+			<el-form size="small">
+				<el-form-item label="今日可接单：">
+					<el-input v-model="numObj.day_order_limit" style="width: 150px">
+						<template slot="append">单</template>
+					</el-input>
+				</el-form-item>
+				<el-form-item label="本周可接单：">
+					<el-input v-model="numObj.week_order_limit" style="width: 150px">
+						<template slot="append">单</template>
+					</el-input>
+				</el-form-item>
+				<el-form-item label="本月可接单：">
+					<el-input v-model="numObj.month_order_limit" style="width: 150px">
+						<template slot="append">单</template>
+					</el-input>
+				</el-form-item>
+			</el-form>
+			<span slot="footer" class="dialog-footer">
+				<el-button size="small" type="primary" @click="save">保存</el-button>
+			</span>
 		</el-dialog>
 	</div>
 </template>
@@ -148,6 +172,14 @@
 				part4:[],
 				cardImgList:[],			//图片列表
 				showImg:false,			//默认图片弹框不显示
+				showDialog:false,		//默认修改接单数不显示
+				numObj:{
+					day_order_limit:"",
+					week_order_limit:"",
+					month_order_limit:""
+				},
+				wang:"",
+				id:""
 			}
 		},
 		props:{
@@ -225,7 +257,34 @@
 						message: '取消'
 					});          
 				});
-			}
+			},
+			//点击修改接单数
+			updateNum(wang,id){
+				this.wang = wang;
+				this.id = id;
+				resource.updateWang({wangwang:wang}).then(res => {
+					if(res.data.code == 1){
+						this.numObj = res.data.data;
+						this.showDialog = true;
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
+			},
+			//点击修改的保存
+			save(){
+				this.numObj.wangwang = this.wang;
+				this.numObj.id = this.id;
+				resource.updateWangPost(this.numObj).then(res => {
+					if(res.data.code == 1){
+						this.showDialog = false;
+						//获取用户信息
+						this.getUserDetail();
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
+			},
 
 		}
 	}

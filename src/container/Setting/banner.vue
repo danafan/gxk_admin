@@ -68,10 +68,10 @@
 				</div>
 				<upload-file @callbackFn="callbackFn" v-else></upload-file>
 			</div>
-			<el-form-item label="广告链接：" required>
+			<el-form-item label="广告链接：">
 				<el-input v-model="objReq.banner_url" style="width: 200px" size="small" placeholder="输入广告链接"></el-input>
 			</el-form-item>
-			<el-form-item label="广告备注：" required>
+			<el-form-item label="广告备注：">
 				<el-input v-model="objReq.banner_remark" type="textarea"
 				:rows="3" style="width: 200px" size="small" placeholder="输入广告备注"></el-input>
 			</el-form-item>
@@ -227,16 +227,10 @@
 			submit(){
 				if(this.objReq.banner_name == ""){
 					this.$message.warning('请输入名称');
-				}else if(this.objReq.start_datetime == ""){
-					this.$message.warning('请输入开始时间');
-				}else if(this.objReq.end_datetime == ""){
-					this.$message.warning('请输入结束时间');
+				}else if(new Date(this.objReq.start_datetime).getTime() > new Date(this.objReq.end_datetime).getTime()){
+					this.$message.warning('开始时间不能大于结束时间');
 				}else if(this.objReq.banner_img == ""){
 					this.$message.warning('请上传广告图片');
-				}else if(this.objReq.banner_url == ""){
-					this.$message.warning('请输入广告链接');
-				}else if(this.objReq.banner_remark == ""){
-					this.$message.warning('请输入广告备注');
 				}else{
 					if(this.dialogType == 1){
 						resource.addBanner(this.objReq).then(res => {

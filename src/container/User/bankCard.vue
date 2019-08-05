@@ -56,8 +56,8 @@
 			</el-table-column>
 			<el-table-column label="操作" align="center">
 				<template slot-scope="scope">
-					<el-button type="text" size="small" @click="check(scope.row.id,'1')">通过</el-button>
-					<el-button type="text" size="small" @click="check(scope.row.id,'2')">拒绝</el-button>
+					<el-button type="text" v-if="scope.row.check_status == 0" size="small" @click="check(scope.row.id,'1')">通过</el-button>
+					<el-button type="text" v-if="scope.row.check_status == 0" size="small" @click="check(scope.row.id,'2')">拒绝</el-button>
 				</template>
 			</el-table-column>
 		</el-table>

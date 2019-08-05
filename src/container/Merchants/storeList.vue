@@ -6,10 +6,10 @@
 					<el-input v-model="req.store_name" placeholder="请输入商家名称"></el-input>
 				</el-form-item>
 				<el-form-item label="店铺名称：">
-					<el-input v-model="req.shop_name" placeholder="请输入商家账号"></el-input>
+					<el-input v-model="req.shop_name" placeholder="请输入店铺名称"></el-input>
 				</el-form-item>
 				<el-form-item label="创建人：">
-					<el-input v-model="req.add_name" placeholder="请输入商家账号"></el-input>
+					<el-input v-model="req.add_name" placeholder="请输入创建人"></el-input>
 				</el-form-item>
 				<el-form-item label="创建时间：">
 					<el-date-picker

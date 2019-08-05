@@ -38,13 +38,13 @@
 	<el-dialog :title="dialogType == 1?'创建类目':'编辑类目'" center width="30%" :visible.sync="showDialog">
 		<el-form size="small">
 			<el-form-item label="类目名称：">
-				<el-input v-model="objReq.cate_name" style="width: 200px" size="small" placeholder="请输入店铺名称"></el-input>
+				<el-input v-model="objReq.cate_name" style="width: 200px" size="small" placeholder="请输入类目名称"></el-input>
 			</el-form-item>
 			<el-form-item label="同类目接任务时间间隔：">
-				<el-input v-model="objReq.limit_day" style="width: 100px" size="small">
+				<el-input type="number" v-model="objReq.limit_day" style="width: 120px" size="small">
 					<template slot="append">天</template>
 				</el-input>
-				<el-input v-model="objReq.limit_num" style="width: 100px" size="small">
+				<el-input type="number" v-model="objReq.limit_num" style="width: 120px" size="small">
 					<template slot="append">单</template>
 				</el-input>
 			</el-form-item>

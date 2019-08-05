@@ -33,10 +33,10 @@
 	<el-dialog :title="dialogType == 1?'创建标签':'编辑标签'" center width="30%" :visible.sync="showDialog">
 		<el-form size="small">
 			<el-form-item label="标签名称：">
-				<el-input v-model="objReq.tag_name" style="width: 200px" size="small" placeholder="请输入店铺名称"></el-input>
+				<el-input v-model="objReq.tag_name" style="width: 200px" size="small" placeholder="请输入标签名称"></el-input>
 			</el-form-item>
 			<el-form-item label="标签含义：">
-				<el-input v-model="objReq.tag_desc" style="width: 200px" size="small" placeholder="请输入淘宝店铺名称"></el-input>
+				<el-input v-model="objReq.tag_desc" style="width: 200px" size="small" placeholder="请输入标签含义"></el-input>
 			</el-form-item>
 		</el-form>
 		<span slot="footer" class="dialog-footer">

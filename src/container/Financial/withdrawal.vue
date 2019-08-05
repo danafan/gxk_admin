@@ -9,7 +9,7 @@
 					<el-date-picker
 					v-model="date"
 					type="datetimerange"
-					value-format="yyyy-MM-dd hh:mm:ss"
+					value-format="yyyy-MM-dd HH:mm:ss"
 					range-separator="至"
 					start-placeholder="开始时间"
 					end-placeholder="结束时间">
@@ -64,6 +64,15 @@
 					<p v-if="scope.row.check_status == 2">审核失败</p>
 				</template>
 			</el-table-column>
+			<el-table-column prop="service_charge" label="提现结果" align="center">
+				<template slot-scope="scope">
+					<p v-if="scope.row.status == 0">提现中</p>
+					<p v-if="scope.row.status == 1">提现成功</p>
+					<p v-if="scope.row.status == 2">提现失败</p>
+					<p v-if="scope.row.status == 3">支付中</p>
+					<p v-if="scope.row.status == 4">已退款</p>
+				</template>
+			</el-table-column>
 			<el-table-column prop="check_time" label="审核时间" align="center">
 			</el-table-column>
 			<el-table-column prop="check_name" label="审核人" align="center">
@@ -71,7 +80,7 @@
 			<el-table-column label="操作" align="center" >
 				<template slot-scope="scope">
 					<el-button v-if="scope.row.status == 0" type="text" size="small" @click="check(scope.row.id,1)">审核</el-button>
-					<el-button v-if="scope.row.status == 1" type="text" size="small" @click="check(scope.row.id,2)">查看</el-button>
+					<el-button v-if="scope.row.status == 1 && scope.row.withdrawal_method == 2" type="text" size="small" @click="check(scope.row.id,2)">查看</el-button>
 				</template>
 			</el-table-column>
 		</el-table>

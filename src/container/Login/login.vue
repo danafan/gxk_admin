@@ -87,6 +87,7 @@
 					resource.login(this.request).then(res => {
 						if(res.data.code == '1'){
 							sessionStorage.setItem("admin_name",res.data.data.admin_name);
+							sessionStorage.setItem("user_id",res.data.data.admin_id);
 							this.$message.success("登录成功");
 							this.$router.push('/index');
 						}else{

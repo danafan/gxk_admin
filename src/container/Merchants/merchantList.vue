@@ -31,6 +31,8 @@
 			</el-table-column>
 			<el-table-column prop="store_name" label="商家名称" align="center">
 			</el-table-column>
+			<el-table-column prop="shop_num" label="店铺数量" align="center">
+			</el-table-column>
 			<el-table-column prop="balance_usable" label="余额（元）" align="center">
 			</el-table-column>
 			<el-table-column prop="balance_freeze" label="冻结（元）" align="center">

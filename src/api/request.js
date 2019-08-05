@@ -2,8 +2,12 @@ import axios from './index'
 
 export default {
   post(path, params={}){
-    let target = {};
-    
+    var target = {};
+    let user_id = sessionStorage.getItem("user_id");
+    if(user_id){
+      target.user_id = user_id;
+    }
+
     Object.assign(params, target);
     let form = new FormData();
     let arr = [];
@@ -20,7 +24,11 @@ export default {
     return axios.post(`${path}`, form);
   },
   get(path, params={}){
-    let target = {};
+    var target = {};
+    let user_id = sessionStorage.getItem("user_id");
+    if(user_id){
+      target.user_id = user_id;
+    }
     
     Object.assign(params, target);
     let arr = [];

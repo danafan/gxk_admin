@@ -35,14 +35,14 @@
 				<div class="processedTitle">待处理事务</div>
 				<div class="processCon">
 					<div class="processRow">
-						<div class="rowItem">商家充值待审（<span>{{indexData.rechargeWaitCheck}}</span>）</div>
-						<div class="rowItem">用户身份待审（<span>{{indexData.identityCardWaitCheck}}</span>）</div>
+						<div class="rowItem" @click="$router.push('/merchantTopup')">商家充值待审（<span>{{indexData.rechargeWaitCheck}}</span>）</div>
+						<div class="rowItem" @click="$router.push('/identity')">用户身份待审（<span>{{indexData.identityCardWaitCheck}}</span>）</div>
 						<div class="rowItem">任务订单待审（<span>{{indexData.orderWaitCheck}}</span>）</div>
 					</div>
 					<div class="processRow">
-						<div class="rowItem">提现待审（<span>{{indexData.withdrawWaitCheck}}</span>）</div>
-						<div class="rowItem">旺旺号待审（<span>{{indexData.wwWaitCheck}}</span>）</div>
-						<div class="rowItem">银行卡待审（<span>{{indexData.bankCardWaitCheck}}</span>）</div>
+						<div class="rowItem" @click="$router.push('/withdrawal')">提现待审（<span>{{indexData.withdrawWaitCheck}}</span>）</div>
+						<div class="rowItem" @click="$router.push('/wangwang')">旺旺号待审（<span>{{indexData.wwWaitCheck}}</span>）</div>
+						<div class="rowItem" @click="$router.push('/bankCard')">银行卡待审（<span>{{indexData.bankCardWaitCheck}}</span>）</div>
 					</div>
 				</div>
 			</div>
@@ -128,6 +128,9 @@
 				span{
 					color: red;
 				}
+			}
+			.rowItem:hover{
+				color: red;
 			}
 		}
 	}

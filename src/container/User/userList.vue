@@ -52,7 +52,7 @@
 		</el-table-column>
 		<el-table-column prop="realName" label="真实姓名" align="center">
 		</el-table-column>
-		<el-table-column prop="inviter_id" label="上级用户" align="center">
+		<el-table-column prop="invite_name" label="上级用户" align="center">
 		</el-table-column>
 		<el-table-column prop="job" label="身份" align="center">
 		</el-table-column>
@@ -195,8 +195,11 @@
 		created(){
 			//获取标签列表
 			this.getTagList();
+			//获取身份列表
+			this.getJobList();
 			//获取列表
 			this.getList();
+
 		},
 		watch:{
 			date1:function(n){

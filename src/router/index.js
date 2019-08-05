@@ -20,11 +20,11 @@ const moneyRecord = resolve=>require(['@/container/Merchants/moneyRecord'],resol
 const merchantTopup = resolve=>require(['@/container/Merchants/merchantTopup'],resolve)
 const storeList = resolve=>require(['@/container/Merchants/storeList'],resolve)
 const orderList = resolve=>require(['@/container/Order/orderList'],resolve)
+const commentOrder = resolve=>require(['@/container/Order/commentOrder'],resolve)
 const tag = resolve=>require(['@/container/Setting/tag'],resolve)
 const category = resolve=>require(['@/container/Setting/category'],resolve)
 const announcement = resolve=>require(['@/container/Setting/announcement'],resolve)
 const banner = resolve=>require(['@/container/Setting/banner'],resolve)
-
 const role = resolve=>require(['@/container/Permissions/role'],resolve)
 const admin = resolve=>require(['@/container/Permissions/admin'],resolve)
 const management = resolve=>require(['@/container/Permissions/management'],resolve)
@@ -58,6 +58,7 @@ const router = new Router({
     { path: '/merchantTopup',name:"商家充值", component: merchantTopup},
     { path: '/storeList',name:"店铺列表", component: storeList},
     { path: '/orderList',name:"订单列表", component: orderList},
+    { path: '/commentOrder',name:"订单列表", component: commentOrder},
     { path: '/tag',name:"标签管理", component: tag},
     { path: '/category',name:"类目管理", component: category},
     { path: '/announcement',name:"公告", component: announcement},

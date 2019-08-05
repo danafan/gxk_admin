@@ -421,7 +421,7 @@
 						if(this.processedStep[i].stepInfo[j].time){
 							this.processedStep[i].stepInfo[j].value = parseInt(this.processedStep[i].stepInfo[j].shi)*this.processedStep[i].stepInfo[j].time;
 						}
-						if(this.processedStep[i].stepInfo[j].value == ""){
+						if(this.processedStep[i].stepInfo[j].value == "" || (this.processedStep[i].stepInfo[j].item_id == 3 && this.processedStep[i].stepInfo[j].shi == '')){
 							this.$message.warning('请完善任务步骤');
 							return;
 						}else{
@@ -439,6 +439,7 @@
 				}
 				this.req.step_ids = step_ids.join(',');
 				//处理第二页的可见商家
+				this.detailStoreList = [];
 				for(var s = 0;s < this.shop_template_ids.length;s ++){
 					for(var m = 0;m < this.storeList.length;m ++){
 						if(this.shop_template_ids[s] == this.storeList[m].store_id){
@@ -447,6 +448,7 @@
 					}
 				}
 				//处理第二页的服务费
+				this.detailServiceList = [];
 				this.serviceMoney.map(item => {
 					let str = `${item.charge_begin}-${item.charge_end}之间收取${item.charge}元服务费`;
 					this.detailServiceList.push(str);

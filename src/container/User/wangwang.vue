@@ -8,7 +8,7 @@
 						</el-option>
 					</el-select>
 				</el-form-item>
-				<el-form-item label="绑定时间时间：">
+				<el-form-item label="绑定时间：">
 					<el-date-picker
 					v-model="date"
 					type="datetimerange"

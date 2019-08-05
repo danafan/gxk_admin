@@ -36,7 +36,10 @@
 			</el-table-column>
 			<el-table-column prop="id" label="交易流水号" align="center">
 			</el-table-column>
-			<el-table-column prop="store_name" label="商家账号" align="center">
+			<el-table-column label="商家账号/名称" align="center">
+				<template slot-scope="scope">
+					<span>{{scope.row.store_admin_name}}</span>/<span>{{scope.row.store_name}}</span>
+				</template>
 			</el-table-column>
 			<el-table-column prop="open_account_name" label="开户名" align="center">
 			</el-table-column>

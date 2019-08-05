@@ -122,26 +122,22 @@
 			let tab = sessionStorage.getItem("tab");
 			if(!tab){
 				this.activeIndex = '/index';
-				// this.$router.push('/store')
 			}else{
 				if(tab == '/userDetail'){
 					this.activeIndex = '/userList';
 				}else{
 					this.activeIndex = tab;
 				}
-				// this.$router.push(tab);
 			}
 		},	
-		// watch:{
-		// 	$route(n){
-		// 		sessionStorage.setItem("tab",n);
-		// 		this.handleSelect(this.activeIndex);
-		// 		this.levelList = this.$route.matched.filter(item=>item.name)
-		// 	}
-		// },
+		watch:{
+			$route(n){
+				this.handleSelect(n.path);
+				this.levelList = this.$route.matched.filter(item=>item.name)
+			}
+		},
 		methods:{
 			handleSelect(index){
-				// sessionStorage.setItem("tab",index);
 				this.activeIndex = index;
 			},
 			//获取我的菜单列表
@@ -165,17 +161,6 @@
 					this.levelList = this.$route.matched.filter(item=>item.name)
 				})
 			},
-			//获取客服信息
-			// service(){
-			// 	resource.service().then(res => {
-			// 		if(res.data.code == '1'){
-			// 			this.qq = res.data.qq;
-			// 			this.wechat = res.data.wechat;
-			// 		}else{
-			// 			this.$message.warning(res.data.msg)
-			// 		}
-			// 	})
-			// },
 			//点击退出
 			exit(){
 				this.$confirm('确认退出当前账户?', '提示', {
