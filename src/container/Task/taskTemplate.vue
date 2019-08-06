@@ -28,7 +28,7 @@
 				</el-table-column>
 				<el-table-column prop="create_time" label="创建时间" align="center">
 				</el-table-column>
-				<el-table-column prop="use_times" label="模版使用次数" align="center">
+				<el-table-column prop="template_use_num" label="模版使用次数" align="center">
 				</el-table-column>
 				<el-table-column prop="shop_use_num" label="多少商家使用过该模板" align="center">
 				</el-table-column>

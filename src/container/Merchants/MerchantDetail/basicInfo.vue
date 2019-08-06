@@ -73,7 +73,8 @@
 			<el-table-column label="操作" align="center">
 				<template slot-scope="scope">
 					<el-button type="text" size="small" @click="edior(scope.row.shop_id)">编辑</el-button>
-					<el-button type="text" size="small" @click="deletes(scope.row.shop_id)">删除</el-button>
+					<el-button v-if="scope.row.is_del == 1" type="text" size="small" @click="deletes(scope.row.shop_id,scope.row.is_del)">启用</el-button>
+					<el-button v-if="scope.row.is_del == 0" type="text" size="small" @click="deletes(scope.row.shop_id,scope.row.is_del)">停用</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -97,6 +98,9 @@
 			<el-form size="small">
 				<el-form-item label="店铺名称：" required>
 					<el-input v-model="storeReq.shop_name" style="width: 200px" size="small" placeholder="请输入店铺名称"></el-input>
+				</el-form-item>
+				<el-form-item label="店铺链接：" required>
+					<el-input v-model="storeReq.shop_url" style="width: 200px" size="small" placeholder="请输入店铺链接"></el-input>
 				</el-form-item>
 				<el-form-item label="淘宝店铺名称：" required>
 					<el-input v-model="storeReq.tao_shop_name" style="width: 200px" size="small" placeholder="请输入淘宝店铺名称"></el-input>
@@ -183,6 +187,7 @@
 				shop_id:"",				//选中的店铺id
 				storeReq:{
 					shop_name:"",
+					shop_url:"",
 					tao_shop_name:"",
 					erp_shop_id:"",
 					verify_tbk:1,
@@ -243,6 +248,7 @@
 				this.createStore = true;
 				this.storeReq = {
 					shop_name:"",
+					shop_url:"",
 					tao_shop_name:"",
 					erp_shop_id:"",
 					verify_tbk:1,
@@ -273,8 +279,8 @@
 				})
 			},
 			//点击删除
-			deletes(id){
-				this.$confirm('确认删除该店铺?', '提示', {
+			deletes(id,isdel){
+				this.$confirm(`确认${isdel == 1?'启用':'停用'}?`, '提示', {
 					confirmButtonText: '确定',
 					cancelButtonText: '取消',
 					type: 'warning'
@@ -319,6 +325,8 @@
 			submitStore(){
 				if(this.storeReq.shop_name == ""){
 					this.$message.warning('请输入店铺名称');
+				}else if(this.storeReq.shop_url == ""){
+					this.$message.warning('请输入店铺链接');
 				}else if(this.storeReq.tao_shop_name == ""){
 					this.$message.warning('请输入淘宝店铺名称');
 				}else if(this.storeReq.erp_shop_id == ""){

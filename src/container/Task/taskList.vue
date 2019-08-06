@@ -20,7 +20,7 @@
 					</el-select>
 				</el-form-item>
 				<el-form-item label="任务完成情况：">
-					<el-select v-model="req.template_id" filterable placeholder="请选择">
+					<el-select v-model="req.task_finish_status" filterable placeholder="请选择">
 						<el-option label="不限" value=""></el-option>
 						<el-option label="未完成" value="0"></el-option>
 						<el-option label="已完成" value="1"></el-option>

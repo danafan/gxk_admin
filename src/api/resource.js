@@ -95,7 +95,10 @@ let path = {
 	updateAccess:'access/edit',								//修改权限
 	deleteAccess:'access/del',								//删除权限
 	getMenuList:'admin/mymenulist',							//菜单列表
-}			
+	commentList:'comment/commentlist',						//评价任务列表
+	getSystemInfo:'system/getsystemconfig',					//获取系统配置
+	setSystem:'system/systemconfigupdate',					//系统设置
+}				
 export default{
 	//登录
 	login(params){
@@ -500,6 +503,18 @@ export default{
 	//我的菜单列表
 	getMenuList2(params){
 		return http.get(path.getMenuList2, params)
+	},
+	//评价任务列表
+	commentList(params){
+		return http.get(path.commentList, params)
+	},
+	//获取系统配置
+	getSystemInfo(params){
+		return http.get(path.getSystemInfo, params)
+	},
+	//系统设置
+	setSystem(params){
+		return http.post(path.setSystem, params)
 	},
 }
 

@@ -67,6 +67,9 @@
 		<el-form-item label="店铺名称：" required>
 			<el-input v-model="storeReq.shop_name" style="width: 200px" size="small" placeholder="请输入店铺名称"></el-input>
 		</el-form-item>
+		<el-form-item label="店铺链接：" required>
+			<el-input v-model="storeReq.shop_url" style="width: 200px" size="small" placeholder="请输入店铺链接"></el-input>
+		</el-form-item>
 		<el-form-item label="淘宝店铺名称：" required>
 			<el-input v-model="storeReq.tao_shop_name" style="width: 200px" size="small" placeholder="请输入淘宝店铺名称"></el-input>
 		</el-form-item>
@@ -203,6 +206,8 @@
 			submitStore(){
 				if(this.storeReq.shop_name == ""){
 					this.$message.warning('请输入店铺名称');
+				}else if(this.storeReq.shop_url == ""){
+					this.$message.warning('请输入店铺链接');
 				}else if(this.storeReq.tao_shop_name == ""){
 					this.$message.warning('请输入淘宝店铺名称');
 				}else if(this.storeReq.erp_shop_id == ""){

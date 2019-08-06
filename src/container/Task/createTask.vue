@@ -349,7 +349,7 @@
 								item.value = item.list[0].id;
 							}else if(item.item_id == 3){
 								item.value = "";
-								item.shi = "";
+								item.shi = "0";
 								item.time = 1;
 								item.list = [{
 									id:1,
@@ -419,9 +419,9 @@
 					var arr = [];
 					for(var j = 0;j < this.processedStep[i].stepInfo.length;j ++){
 						if(this.processedStep[i].stepInfo[j].time){
-							this.processedStep[i].stepInfo[j].value = parseInt(this.processedStep[i].stepInfo[j].shi)*this.processedStep[i].stepInfo[j].time;
+							this.processedStep[i].stepInfo[j].value = parseInt(this.processedStep[i].stepInfo[j].shi?this.processedStep[i].stepInfo[j].shi:0)*this.processedStep[i].stepInfo[j].time;
 						}
-						if(this.processedStep[i].stepInfo[j].value == "" || (this.processedStep[i].stepInfo[j].item_id == 3 && this.processedStep[i].stepInfo[j].shi == '')){
+						if(this.processedStep[i].stepInfo[j].value === ""){
 							this.$message.warning('请完善任务步骤');
 							return;
 						}else{

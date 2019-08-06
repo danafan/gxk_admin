@@ -3,7 +3,7 @@
 		<el-card>
 			<el-form :inline="true" size="small" class="demo-form-inline">
 				<el-form-item label="账号：">
-					<el-input v-model="req.store_admin_name" placeholder="请输入账号"></el-input>
+					<el-input v-model="req.phone" placeholder="请输入账号"></el-input>
 				</el-form-item>
 				<el-form-item label="时间范围：">
 					<el-date-picker
@@ -43,11 +43,11 @@
 			</el-table-column>
 			<el-table-column prop="store_name" label="提现信息" align="center">
 				<template slot-scope="scope">
-					<div v-if="scope.row.withdrawal_method == 1">
+					<div v-if="scope.row.withdrawal_method == 2">
 						<p>提现方式：微信</p>
 						<p>微信昵称：{{scope.row.name}}</p>
 					</div>
-					<div v-if="scope.row.withdrawal_method == 2">
+					<div v-if="scope.row.withdrawal_method == 1">
 						<p>提现方式：银行卡</p>
 						<p>用户姓名：{{scope.row.name}}</p>
 						<p>提现银行：{{scope.row.bank_name}}</p>
@@ -80,7 +80,7 @@
 			<el-table-column label="操作" align="center" >
 				<template slot-scope="scope">
 					<el-button v-if="scope.row.status == 0" type="text" size="small" @click="check(scope.row.id,1)">审核</el-button>
-					<el-button v-if="scope.row.status == 1 && scope.row.withdrawal_method == 2" type="text" size="small" @click="check(scope.row.id,2)">查看</el-button>
+					<el-button v-if="scope.row.status == 1 && scope.row.withdrawal_method == 1" type="text" size="small" @click="check(scope.row.id,2)">查看</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -197,7 +197,7 @@
 					pagesize:10,
 					start_time:"",
 					end_time:"",
-					store_admin_name:"",
+					phone:"",
 					status:"",
 					type:""
 				},

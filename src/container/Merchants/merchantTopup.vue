@@ -3,7 +3,7 @@
 		<el-card>
 			<el-form :inline="true" size="small" class="demo-form-inline">
 				<el-form-item label="商家账号：">
-					<el-input v-model="req.store_id" placeholder="请输入商家账号"></el-input>
+					<el-input v-model="req.admin_name" placeholder="请输入商家账号"></el-input>
 				</el-form-item>
 				<el-form-item label="商家名称：">
 					<el-input v-model="req.store_name" placeholder="请输入商家名称"></el-input>
@@ -56,7 +56,7 @@
 			<el-table-column label="操作" align="center" >
 				<template slot-scope="scope">
 					<el-button v-if="scope.row.status == 0" type="text" size="small" @click="check(scope.row.id,1)">审核</el-button>
-					<el-button v-if="scope.row.status == 1" type="text" size="small" @click="check(scope.row.id,2)">查看</el-button>
+					<el-button v-else type="text" size="small" @click="check(scope.row.id,2)">查看</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -168,7 +168,7 @@
 				req:{
 					page:1,
 					pagesize:10,
-					store_id:"",
+					admin_name:"",
 					store_name:"",
 					start_datetime:"",
 					end_datetime:"",
