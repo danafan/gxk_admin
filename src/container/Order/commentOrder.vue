@@ -36,7 +36,6 @@
 		</el-form>
 		<div class="but">
 			<el-button type="primary" icon="el-icon-download" size="small">导出</el-button>
-			<el-button type="primary" icon="el-icon-download" size="small">修改佣金</el-button>
 		</div>
 		<el-table :data="dataObj.data" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}" :default-sort = "{prop: 'completeTime'}">
 			<el-table-column prop="add_time" label="接单时间" align="center">

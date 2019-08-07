@@ -43,6 +43,12 @@
 			//获取列表
 			this.getList();
 		},
+		props:{
+			phone:{
+				type:String,
+				default:""
+			}
+		},
 		methods:{
 			//分页
 			handleSizeChange(val) {
@@ -57,6 +63,7 @@
 			},
 			//获取列表
 			getList(){
+				this.req.phone = this.phone;
 				resource.logList(this.req).then(res => {
 					if(res.data.code == 1){
 						this.dataObj = res.data;

@@ -60,7 +60,7 @@
 					<el-input v-model="objReq.title" style="width: 200px" size="small" placeholder="输入公告标题"></el-input>
 				</div>
 			</el-form-item>
-			<el-form-item label="公告内容：" required>
+			<el-form-item label="公告内容：">
 				<div>
 					<el-input v-model="objReq.content" type="textarea"
 					:rows="3" style="width: 200px" size="small" placeholder="输入公告内容"></el-input>
@@ -163,8 +163,6 @@
 					this.$message.warning('开始时间不能大于结束时间');
 				}else if(this.objReq.title == ""){
 					this.$message.warning('请输入公告标题');
-				}else if(this.objReq.content == ""){
-					this.$message.warning('请输入公告内容');
 				}else{
 					if(this.dialogType == 1){
 						resource.addNotice(this.objReq).then(res => {

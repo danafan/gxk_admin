@@ -50,11 +50,11 @@
 					<div style="font-size: 12px">名称只作为辨别多个条目之用</div>
 				</div>
 			</el-form-item>
-			<el-form-item label="开始时间：" required>
+			<el-form-item label="开始时间：">
 				<el-date-picker v-model="objReq.start_datetime" value-format="yyyy-MM-dd hh:mm:ss" type="datetime" placeholder="选择开始时间">
 				</el-date-picker>
 			</el-form-item>
-			<el-form-item label="结束时间：" required>
+			<el-form-item label="结束时间：">
 				<el-date-picker v-model="objReq.end_datetime" value-format="yyyy-MM-dd hh:mm:ss" type="datetime" placeholder="选择结束时间">
 				</el-date-picker>
 			</el-form-item>

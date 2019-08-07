@@ -29,6 +29,8 @@
 			</el-table-column>
 			<el-table-column prop="store_admin_name" label="商家账号" align="center">
 			</el-table-column>
+			<el-table-column prop="store_name" label="商家名称" align="center">
+			</el-table-column>
 			<el-table-column prop="statement_type" label="交易类型" align="center">
 			</el-table-column>
 			<el-table-column prop="income_outgoing" label="金额（元）" align="center">

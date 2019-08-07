@@ -117,13 +117,13 @@
 				<el-form-item label="下单任务限制（天/单）：" required>
 					<el-input v-model="storeReq.task_interval" type="number" style="width: 200px" size="small" placeholder="请输入天数"></el-input>
 				</el-form-item>
-				<el-form-item label="收件人：" required>
+				<el-form-item label="收件人：">
 					<el-input v-model="storeReq.receiver" style="width: 200px" size="small" placeholder="请输入收件人"></el-input>
 				</el-form-item>
-				<el-form-item label="收件人手机号：" required>
+				<el-form-item label="收件人手机号：">
 					<el-input v-model="storeReq.phone" type="number" style="width: 200px" size="small" placeholder="请输入收件人手机号"></el-input>
 				</el-form-item>
-				<el-form-item label="退货地址：" required>
+				<el-form-item label="退货地址：">
 					<el-input v-model="storeReq.back_address" type="textarea" :row="3" style="width: 200px" size="small" placeholder="请输入退货地址"></el-input>
 				</el-form-item>
 			</el-form>
@@ -221,7 +221,7 @@
 			},
 			//商家账号设置禁用
 			setting(id){
-				this.$confirm('确认禁用该账号?', '提示', {
+				this.$confirm('确认删除该账号?', '提示', {
 					confirmButtonText: '确定',
 					cancelButtonText: '取消',
 					type: 'warning'
@@ -333,12 +333,6 @@
 					this.$message.warning('请输入店铺ID');
 				}else if(this.storeReq.task_interval == ""){
 					this.$message.warning('请输入天数');
-				}else if(this.storeReq.receiver == ""){
-					this.$message.warning('请输入收件人');
-				}else if(this.storeReq.phone == ""){
-					this.$message.warning('请输入收件人手机号');
-				}else if(this.storeReq.back_address == ""){
-					this.$message.warning('请输入收货地址');
 				}else{
 					if(this.createStoreType == 1){
 						this.storeReq.store_id = this.id;

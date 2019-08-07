@@ -8,12 +8,6 @@
 				<el-form-item label="上级用户：">
 					<el-input v-model="req.inviter_id" placeholder="请输入用户名"></el-input>
 				</el-form-item>
-				<el-form-item label="标签：">
-					<el-select v-model="req.tag_id" filterable placeholder="请选择">
-						<el-option v-for="item in tagList" :key="item.tag_id" :label="item.tag_name" :value="item.tag_id">
-						</el-option>
-					</el-select>
-				</el-form-item>
 				<el-form-item label="身份：">
 					<el-select v-model="req.job" filterable placeholder="请选择">
 						<el-option v-for="item in jobList" :key="item.job_id" :label="item.job_name" :value="item.job_id">
@@ -24,7 +18,7 @@
 					<el-date-picker
 					v-model="date1"
 					type="datetimerange"
-					value-format="yyyy-MM-dd hh:mm:ss"
+					value-format="yyyy-MM-dd HH:mm:ss"
 					range-separator="至"
 					start-placeholder="开始时间"
 					end-placeholder="结束时间">
@@ -34,7 +28,7 @@
 				<el-date-picker
 				v-model="date2"
 				type="datetimerange"
-				value-format="yyyy-MM-dd hh:mm:ss"
+				value-format="yyyy-MM-dd HH:mm:ss"
 				range-separator="至"
 				start-placeholder="开始时间"
 				end-placeholder="结束时间">
@@ -172,7 +166,6 @@
 					size:10,
 					phone:"",
 					inviter_id:"",
-					tag_id:"",
 					job:"",
 					registeBeginTime:"",
 					registeEndTime:"",
@@ -193,8 +186,6 @@
 			}
 		},
 		created(){
-			//获取标签列表
-			this.getTagList();
 			//获取身份列表
 			this.getJobList();
 			//获取列表
@@ -211,17 +202,7 @@
 				this.req.jobEndTime = n?n[1]:"";
 			}
 		},
-		methods:{
-			//获取标签列表
-			getTagList(){
-				resource.getTagList().then(res => {
-					if(res.data.code == 1){
-						this.tagList = res.data.data;
-					}else{
-						this.$message.warning(res.data.msg);
-					}
-				})
-			},	
+		methods:{	
 			//获取身份列表
 			getJobList(){
 				resource.jobList().then(res => {
@@ -361,6 +342,8 @@
 						if(res.data.code == 1){
 							this.$message.success(res.data.msg);
 							this.showPeople = false;
+							//获取列表
+							this.getList();
 						}else{
 							this.$message.warning(res.data.msg);
 						}

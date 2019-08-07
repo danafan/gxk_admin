@@ -135,6 +135,7 @@
 				resource.getRoleDetail({role_id:id}).then(res => {
 					if(res.data.code == 1){
 						this.showDialog = true;
+						this.checkedCities = [];
 						res.data.data.access_ids.map(item => {
 							this.checkedCities.push(parseInt(item))
 						})

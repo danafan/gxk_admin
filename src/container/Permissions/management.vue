@@ -167,6 +167,12 @@
 			addAccess(){
 				this.dislogType = 1;
 				this.showDialog = true;
+				this.accessReq = {
+					access_name:"",
+					menu_id:"",
+					access_codes:""
+				};
+				this.accessCodes = [];
 			},
 			//点击某一个关闭
 			handleClose(index){

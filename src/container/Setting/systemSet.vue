@@ -9,7 +9,8 @@
 					<div class="setItem" v-for="(i,index2) in items.item">
 						<div class="label">{{i.name}}</div>
 						<div class="val">
-							<el-input type="number" v-if="i.label_type == 1" v-model="i.value" style="width: 200px" size="small"></el-input>
+							<el-input type="number" v-if="i.label_type == 1 && i.value_type == 1" v-model="i.value" style="width: 200px" size="small"></el-input>
+							<el-input type="text" v-if="i.label_type == 1 && i.value_type == 2" v-model="i.value" style="width: 200px" size="small"></el-input>
 							<el-radio v-if="i.label_type == 2" v-model="i.value" label="1">是</el-radio>
 							<el-radio v-if="i.label_type == 2" v-model="i.value" label="0">否</el-radio>
 						</div>

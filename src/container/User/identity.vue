@@ -45,14 +45,14 @@
 			</el-table-column>
 			<el-table-column prop="status" label="审核状态" align="center">
 			</el-table-column>
-			<el-table-column prop="check_admin_id" label="审核人" align="center">
+			<el-table-column prop="check_admin_name" label="审核人" align="center">
 			</el-table-column>
 			<el-table-column prop="check_time" label="审核时间" align="center">
 			</el-table-column>
 			<el-table-column label="操作" align="center">
 				<template slot-scope="scope">
-					<el-button type="text" size="small" @click="check(scope.row.id,'2')">通过</el-button>
-					<el-button type="text" size="small" @click="check(scope.row.id,'3')">拒绝</el-button>
+					<el-button type="text" v-if="scope.row.status_id == 1" size="small" @click="check(scope.row.id,'2')">通过</el-button>
+					<el-button type="text" v-if="scope.row.status_id == 1" size="small" @click="check(scope.row.id,'3')">拒绝</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
