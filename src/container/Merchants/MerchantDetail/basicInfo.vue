@@ -42,9 +42,9 @@
 		<el-table :data="infoObj.store_admin" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}" :default-sort = "{prop: 'completeTime'}">
 			<el-table-column prop="admin_name" label="商家账号" align="center">
 			</el-table-column>
-			<el-table-column prop="check_name" label="审核人" align="center">
+			<el-table-column prop="add_name" label="创建人" align="center">
 			</el-table-column>
-			<el-table-column prop="add_time" label="审核时间" align="center">
+			<el-table-column prop="add_time" label="创建时间" align="center">
 			</el-table-column>
 			<el-table-column label="操作" align="center">
 				<template slot-scope="scope">

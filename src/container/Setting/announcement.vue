@@ -13,8 +13,8 @@
 				</el-table-column>
 				<el-table-column label="时间" align="center">
 					<template slot-scope="scope">
-						<p>开始时间：{{scope.row.start_time}}</p>
-						<p>结束时间：{{scope.row.end_time}}</p>
+						<p v-if="scope.row.start_time != ''">开始时间：{{scope.row.start_time}}</p>
+						<p v-if="scope.row.end_time != ''">结束时间：{{scope.row.end_time}}</p>
 					</template>
 				</el-table-column>
 				<el-table-column label="操作" align="center">

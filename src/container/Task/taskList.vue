@@ -22,15 +22,15 @@
 				<el-form-item label="任务完成情况：">
 					<el-select v-model="req.task_finish_status" filterable placeholder="请选择">
 						<el-option label="不限" value=""></el-option>
-						<el-option label="未完成" value="0"></el-option>
-						<el-option label="已完成" value="1"></el-option>
+						<el-option label="有剩余" value="0"></el-option>
+						<el-option label="无剩余" value="1"></el-option>
 					</el-select>
 				</el-form-item>
 				<el-form-item label="任务时间：">
 					<el-date-picker
 					v-model="date"
 					type="datetimerange"
-					value-format="yyyy-MM-dd hh:mm:ss"
+					value-format="yyyy-MM-dd HH:mm:ss"
 					range-separator="至"
 					start-placeholder="开始时间"
 					end-placeholder="结束时间">

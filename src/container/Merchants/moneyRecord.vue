@@ -9,7 +9,7 @@
 					<el-date-picker
 					v-model="date"
 					type="datetimerange"
-					value-format="yyyy-MM-dd hh:mm:ss"
+					value-format="yyyy-MM-dd HH:mm:ss"
 					range-separator="至"
 					start-placeholder="开始时间"
 					end-placeholder="结束时间">
@@ -33,7 +33,7 @@
 			</el-table-column>
 			<el-table-column prop="statement_type" label="交易类型" align="center">
 			</el-table-column>
-			<el-table-column prop="income_outgoing" label="金额（元）" align="center">
+			<el-table-column prop="balance_usable" label="金额（元）" align="center">
 			</el-table-column>
 			<el-table-column prop="residue_balance_usable" label="余额（元）" align="center">
 			</el-table-column>

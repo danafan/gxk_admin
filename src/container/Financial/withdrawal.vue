@@ -220,10 +220,10 @@
 					id:"",
 					name:"不限"
 				},{
-					id:1,
+					id:2,
 					name:"微信"
 				},{
-					id:2,
+					id:1,
 					name:"银行卡"
 				}],
 				showDialog:false,

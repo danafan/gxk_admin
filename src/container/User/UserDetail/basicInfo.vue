@@ -49,8 +49,8 @@
 			</el-table-column>
 			<el-table-column prop="job" label="操作" align="center">
 				<template slot-scope="scope">
-					<el-button type="text" size="small" @click="check(scope.row.id,'2')">通过</el-button>
-					<el-button type="text" size="small" @click="check(scope.row.id,'3')">拒绝</el-button>
+					<el-button type="text" v-if="scope.row.status == 1" size="small" @click="check(scope.row.id,'2')">通过</el-button>
+					<el-button type="text" v-if="scope.row.status == 1" size="small" @click="check(scope.row.id,'3')">拒绝</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
