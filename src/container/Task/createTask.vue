@@ -341,6 +341,14 @@
 			},
 			//点击某一个步骤
 			getStep(obj){
+				if(obj.step_name == '下单'){
+					for(let i = 0;i < this.processedStep.length;i ++){
+						if(this.processedStep[i].title == '下单'){
+							this.$message.warning("任务步骤【下单】只能选择一次");
+							return;
+						}
+					}
+				}
 				resource.getStepPost({id:obj.step_id}).then(res => {
 					if(res.data.code == 1){
 						let list = res.data.data;
