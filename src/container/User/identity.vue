@@ -70,12 +70,13 @@
 	</div>
 </el-card>
 <el-dialog title="身份证图片" center :visible.sync="showDialog">
-	<el-carousel trigger="click" height="400px">
-		<el-carousel-item v-for="item in cardImgList" :key="item">
-			<img class="cardimg" :src="item">
-		</el-carousel-item>
-	</el-carousel>
-</el-dialog>
+	<!-- <el-carousel trigger="click" height="400px"> -->
+		<el-carousel trigger="click" height="auto">
+			<el-carousel-item v-for="item in cardImgList" :key="item">
+				<img class="cardimg" :src="item">
+			</el-carousel-item>
+		</el-carousel>
+	</el-dialog>
 </div>
 </template>
 <style lang="less" scoped>

@@ -42,12 +42,12 @@
 			</el-table-column>
 			<el-table-column prop="id_card_address" label="身份证地址" width="300" align="center">
 			</el-table-column>
-			<el-table-column prop="job" label="身份证图片" align="center">
+			<el-table-column label="身份证图片" align="center">
 				<template slot-scope="scope">
 					<el-button type="text" size="small" @click="showImg = true">查看</el-button>
 				</template>
 			</el-table-column>
-			<el-table-column prop="job" label="操作" align="center">
+			<el-table-column label="操作" align="center">
 				<template slot-scope="scope">
 					<el-button type="text" v-if="scope.row.status == 1" size="small" @click="check(scope.row.id,'2')">通过</el-button>
 					<el-button type="text" v-if="scope.row.status == 1" size="small" @click="check(scope.row.id,'3')">拒绝</el-button>
@@ -202,9 +202,11 @@
 				resource.getUserDetail({phone:this.phone}).then(res => {
 					if(res.data.code == 1){
 						this.part1 = res.data.data.part_1;
-						this.part2.push(res.data.data.part_2);
-						this.cardImgList.push(res.data.data.part_2.id_card_front_img);
-						this.cardImgList.push(res.data.data.part_2.id_card_back_img);
+						if(res.data.data.part_2){
+							this.part2.push(res.data.data.part_2);
+							this.cardImgList.push(res.data.data.part_2.id_card_front_img);
+							this.cardImgList.push(res.data.data.part_2.id_card_back_img);
+						}
 						this.part3.push(res.data.data.part_3);
 						this.part4 = res.data.data.part_4;
 					}else{
