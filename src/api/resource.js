@@ -98,6 +98,11 @@ let path = {
 	commentList:'comment/commentlist',						//评价任务列表
 	getSystemInfo:'system/getsystemconfig',					//获取系统配置
 	setSystem:'system/systemconfigupdate',					//系统设置
+	userAndTag:'user/userandtag',							//获取所有标签及用户标签
+	setTag:'user/settag',									//设置用户标签
+	wangwangForbid:'user/wangwangforbid',					//旺旺号起禁用
+	tasklook:'task/tasklook',								//查看该模版流程
+
 }				
 export default{
 	//登录
@@ -515,6 +520,22 @@ export default{
 	//系统设置
 	setSystem(params){
 		return http.post(path.setSystem, params)
+	},
+	//获取所有标签及用户标签
+	userAndTag(params){
+		return http.get(path.userAndTag, params)
+	},
+	//设置用户标签
+	setTag(params){
+		return http.post(path.setTag, params)
+	},
+	//旺旺号起禁用
+	wangwangForbid(params){
+		return http.get(path.wangwangForbid, params)
+	},
+	//查看模版详情
+	tasklook(params){
+		return http.get(path.tasklook, params)
 	},
 }
 

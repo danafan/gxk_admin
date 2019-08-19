@@ -33,6 +33,15 @@
 							<el-option label="小时" :value="3600"></el-option>
 						</el-select>
 					</el-form-item>
+					<el-form-item label="用户接任务后：">
+						<el-input style="width: 100px;" v-model="time1" placeholder="间隔时间"></el-input>
+						<el-select v-model="timeType1" style="width: 100px;">
+							<el-option label="秒" :value="1"></el-option>
+							<el-option label="分" :value="60"></el-option>
+							<el-option label="小时" :value="3600"></el-option>
+						</el-select>
+						内未完成任务自动取消
+					</el-form-item>
 					<el-form-item label="任务可见商家：">
 						<el-select v-model="shop_template_ids" multiple placeholder="请选择">
 							<el-option v-for="item in storeList" :key="item.store_id" :label="item.store_name" :value="item.store_id">
@@ -98,6 +107,12 @@
 						<div class="temContent" v-if="timeType == 1">{{req.user_task_time}}秒</div>
 						<div class="temContent" v-if="timeType == 60">{{req.user_task_time/60}}分钟</div>
 						<div class="temContent" v-if="timeType == 3600">{{req.user_task_time/3600}}小时</div>
+					</div>
+					<div class="temRow">
+						<div class="temLabel">自动取消时间</div>
+						<div class="temContent" v-if="timeType1 == 1">{{req.auto_cancel}}秒</div>
+						<div class="temContent" v-if="timeType1 == 60">{{req.auto_cancel/60}}分钟</div>
+						<div class="temContent" v-if="timeType1 == 3600">{{req.auto_cancel/3600}}小时</div>
 					</div>
 					<div class="temRow">
 						<div class="temLabel">任务可见商家</div>
@@ -285,7 +300,9 @@
 					charge:""
 				}],									//所有服务费条目（*）
 				time:"",							//填写的时间
+				time1:"",
 				timeType:1,							//间隔时间类型（默认秒）
+				timeType1:1,
 				shop_template_ids:[],				//选中所有商家列表（*）
 				processedStep:[],					//待处理的步骤列表
 				detailStoreList:[],					//第二步显示选中商家
@@ -415,6 +432,13 @@
 				}else{
 					this.req.user_task_time = parseInt(this.time)*this.timeType;
 				}
+				// 处理自动取消时间时间
+				if(this.time1 == ""){
+					this.$message.warning("请输入自动取消时间");
+					return;
+				}else{
+					this.req.auto_cancel = parseInt(this.time1)*this.timeType1;
+				}
 				// 处理商家id集合
 				this.req.shop_template_ids = this.shop_template_ids.join(',');
 				//处理选择的任务步骤
@@ -475,6 +499,7 @@
 						template_user_name:this.req.template_user_name,
 						step_ids:this.req.step_ids,
 						user_task_time:this.req.user_task_time,
+						auto_cancel:this.req.auto_cancel,
 						shop_template_ids:this.req.shop_template_ids,
 						charge:this.req.charge,
 						desc:this.req.desc,

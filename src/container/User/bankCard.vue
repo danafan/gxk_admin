@@ -75,7 +75,7 @@
 	</div>
 </el-card>
 <el-dialog title="银行卡图片" center :visible.sync="showDialog">
-	<el-carousel trigger="click" height="400px">
+	<el-carousel trigger="click">
 		<el-carousel-item v-for="item in cardImgList" :key="item">
 			<img class="cardimg" :src="item">
 		</el-carousel-item>

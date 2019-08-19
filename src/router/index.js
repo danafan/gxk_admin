@@ -13,6 +13,7 @@ const wangwang = resolve=>require(['@/container/User/wangwang'],resolve)
 const bankCard = resolve=>require(['@/container/User/bankCard'],resolve)
 const taskList = resolve=>require(['@/container/Task/taskList'],resolve)
 const taskTemplate = resolve=>require(['@/container/Task/taskTemplate'],resolve)
+const templateDetail = resolve=>require(['@/container/Task/templateDetail'],resolve)
 const createTask = resolve=>require(['@/container/Task/createTask'],resolve)
 const merchantList = resolve=>require(['@/container/Merchants/merchantList'],resolve)
 const merchantDetail = resolve=>require(['@/container/Merchants/merchantDetail'],resolve)
@@ -53,6 +54,7 @@ const router = new Router({
     { path: '/bankCard',name:"银行卡审核", component: bankCard},
     { path: '/taskList',name:"任务列表", component: taskList},
     { path: '/taskTemplate',name:"任务模版", component: taskTemplate},
+    { path: '/templateDetail',name:"模版信息", component: templateDetail},
     { path: '/createTask',name:"创建任务", component: createTask},
     { path: '/merchantList',name:"商家列表", component: merchantList},
     { path: '/merchantDetail',name:"商家详情", component: merchantDetail},

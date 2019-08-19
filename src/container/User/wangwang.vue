@@ -49,6 +49,8 @@
 					<el-button v-if="scope.row.status == 1" type="text" size="small" @click="updateNum(scope.row.wangwang,scope.row.id)">修改接单数</el-button>
 					<el-button v-if="scope.row.status == 0" type="text" size="small" @click="check(scope.row.id,'1')">通过</el-button>
 					<el-button v-if="scope.row.status == 0" type="text" size="small" @click="check(scope.row.id,'2')">拒绝</el-button>
+					<el-button v-if="scope.row.status == 1" type="text" size="small" @click="setting(scope.row.id,'3')">禁用</el-button>
+					<el-button v-if="scope.row.status == 3" type="text" size="small" @click="setting(scope.row.id,'1')">启用</el-button>
 				</template>
 			</el-table-column>
 		</el-table>
@@ -216,7 +218,30 @@
 				}).catch(() => {
 					this.$message({
 						type: 'info',
-						message: '取消退出'
+						message: '取消'
+					});          
+				});
+			},
+			//启/禁用
+			setting(id,status){
+				this.$confirm(`确认${status == '1'?'启用':'禁用'}?`, '提示', {
+					confirmButtonText: '确定',
+					cancelButtonText: '取消',
+					type: 'warning'
+				}).then(() => {
+					resource.wangwangForbid({id:id,status:status}).then(res => {
+						if(res.data.code == 1){
+							this.$message.success(res.data.msg);
+							//获取列表
+							this.getList();
+						}else{
+							this.$message.warning(res.data.msg);
+						}
+					})
+				}).catch(() => {
+					this.$message({
+						type: 'info',
+						message: '取消'
 					});          
 				});
 			}

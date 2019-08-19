@@ -34,7 +34,9 @@
 				</el-table-column>
 				<el-table-column label="操作" align="center" >
 					<template slot-scope="scope">
-						<el-button type="text" size="small" @click="deletes(scope.row.template_id)">删除</el-button>
+						<el-button type="text" size="small" @click="look(scope.row.template_id)">查看</el-button>
+						<el-button type="text" v-if="scope.row.using == 0" size="small" @click="setting(scope.row.template_id,scope.row.using)">停用</el-button>
+						<el-button type="text" v-if="scope.row.using == 1" size="small" @click="setting(scope.row.template_id,scope.row.using)">启用</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -117,14 +119,22 @@
 					}
 				})
 			},
+			//点击查看
+			look(id){
+				this.$router.push(`/templateDetail?id=${id}`);
+			},
 			//操作
-			deletes(id){
-				this.$confirm('确认删除该模版?', '提示', {
+			setting(id,using){
+				this.$confirm(`确认${using == 0?'停用':'启用'}该模版?`, '提示', {
 					confirmButtonText: '确定',
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-					resource.deleteTemp({id:id}).then(res => {
+					let obj = {
+						using:using == 0?1:0,
+						id:id
+					}
+					resource.deleteTemp(obj).then(res => {
 						if(res.data.code == 1){
 							this.$message.success(res.data.msg);
 							//获取列表

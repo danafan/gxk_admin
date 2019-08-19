@@ -68,6 +68,7 @@
 				<el-button type="text" size="small" @click="setMoney(scope.row.phone,'2')">解冻</el-button>
 				<el-button type="text" size="small" @click="setPeople(scope.row.phone)">邀请</el-button>
 				<el-button type="text" size="small" @click="$router.push('/userDetail?phone=' + scope.row.phone)">查看</el-button>
+				<el-button type="text" size="small" @click="userAndTag(scope.row.user_id)">标签</el-button>
 			</template>
 		</el-table-column>
 	</el-table>
@@ -140,6 +141,18 @@
 		<el-button size="small" type="primary" @click="submitPeople">确 定</el-button>
 	</span>
 </el-dialog>
+<!-- 设置标签 -->
+<el-dialog title="修改标签" center width="30%" :visible.sync="showTag">
+	<div>
+		<el-checkbox-group v-model="userTagIds">
+			<el-checkbox :label="item.tag_id" v-for="item in tags">{{item.tag_name}}</el-checkbox>
+		</el-checkbox-group>
+	</div>
+	<span slot="footer" class="dialog-footer">
+		<el-button size="small" @click="showTag = false">取消</el-button>
+		<el-button size="small" type="primary" @click="submitTag">确 定</el-button>
+	</span>
+</el-dialog>
 </div>
 </template>
 <style lang="less" scoped>
@@ -183,6 +196,10 @@
 				showPeople:false,			//邀请人弹框不显示
 				showPeopleTxt:"",			//输入的调整人数
 				peopleDetail:{},			//获取的人数信息
+				showTag:false,				//修改标签弹框
+				tags:[],					//所有标签
+				userTagIds:[],				//用户选中的标签id
+				user_id:"",					//选中的userid
 			}
 		},
 		created(){
@@ -349,6 +366,34 @@
 						}
 					})
 				}
+			},
+			//点击标签
+			userAndTag(user_id){
+				this.user_id = user_id;
+				resource.userAndTag({user_id:this.user_id}).then(res => {
+					if(res.data.code == 1){
+						this.showTag = true;
+						this.tags = res.data.data.tags;
+						this.userTagIds = res.data.data.userTagIds;
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
+			},
+			//点击修改标签的确定
+			submitTag(){
+				let req = {
+					user_id:this.user_id,
+					tags:JSON.stringify(this.userTagIds)
+				}
+				resource.setTag(req).then(res => {
+					if(res.data.code == 1){
+						this.showTag = false;
+						this.$message.success("设置成功");
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
 			}
 			
 		}

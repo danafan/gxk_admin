@@ -5,6 +5,9 @@
 				<el-form-item label="账号：">
 					<el-input v-model="req.store_admin_name" placeholder="请输入账号"></el-input>
 				</el-form-item>
+				<el-form-item label="商家名称：">
+					<el-input v-model="req.store_name" placeholder="请输入商家名称"></el-input>
+				</el-form-item>
 				<el-form-item label="时间范围：">
 					<el-date-picker
 					v-model="date"
@@ -63,6 +66,7 @@
 					page:1,
 					pagesize:10,
 					start_time:"",
+					store_name:"",
 					end_time:"",
 					store_admin_name:""
 				},
