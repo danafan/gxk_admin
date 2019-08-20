@@ -10,11 +10,11 @@
 				</el-table-column>
 				<el-table-column prop="store_name" label="提现信息" align="center">
 					<template slot-scope="scope">
-						<div v-if="scope.row.withdrawal_method == 1">
+						<div v-if="scope.row.withdrawal_method == 2">
 							<p>提现方式：微信</p>
 							<p>微信昵称：{{scope.row.name}}</p>
 						</div>
-						<div v-if="scope.row.withdrawal_method == 2">
+						<div v-if="scope.row.withdrawal_method == 1">
 							<p>提现方式：银行卡</p>
 							<p>用户姓名：{{scope.row.name}}</p>
 							<p>提现银行：{{scope.row.bank_name}}</p>
@@ -38,7 +38,7 @@
 				<el-table-column label="操作" align="center" >
 					<template slot-scope="scope">
 						<el-button v-if="scope.row.check_status == 0" type="text" size="small" @click="check(scope.row.id,1)">审核</el-button>
-						<el-button v-if="scope.row.check_status == 1" type="text" size="small" @click="check(scope.row.id,2)">查看</el-button>
+						<el-button v-if="scope.row.check_status == 1 && scope.row.withdrawal_method == 1" type="text" size="small" @click="check(scope.row.id,2)">查看</el-button>
 					</template>
 				</el-table-column>
 			</el-table>

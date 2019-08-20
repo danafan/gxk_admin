@@ -16,14 +16,7 @@
 					<p>获得佣金：{{scope.row.commission}}</p>
 				</template>
 			</el-table-column>
-			<el-table-column prop="doneOrderNum" label="订单状态" align="center">
-				<template slot-scope="scope">
-					<p v-if="scope.row.order_status == 0">待操作</p>
-					<p v-if="scope.row.order_status == 1">待审核</p>
-					<p v-if="scope.row.order_status == 2">已完成</p>
-					<p v-if="scope.row.order_status == 3">放弃或者过期</p>
-					<p v-if="scope.row.order_status == 4">系统结束</p>
-				</template>
+			<el-table-column prop="order_status" label="订单状态" align="center">
 			</el-table-column>
 		</el-table>
 		<div class="page">

@@ -34,6 +34,7 @@
 				</el-table-column>
 				<el-table-column label="操作" align="center" >
 					<template slot-scope="scope">
+						<el-button type="text" size="small" @click="updateStore(scope.row.template_id)">修改可见商家</el-button>
 						<el-button type="text" size="small" @click="look(scope.row.template_id)">查看</el-button>
 						<el-button type="text" v-if="scope.row.using == 0" size="small" @click="setting(scope.row.template_id,scope.row.using)">停用</el-button>
 						<el-button type="text" v-if="scope.row.using == 1" size="small" @click="setting(scope.row.template_id,scope.row.using)">启用</el-button>
@@ -53,6 +54,19 @@
 			</el-pagination>
 		</div>
 	</el-card>
+	<el-dialog title="修改可见商家" center width="50%" :visible.sync="updateShop">
+		<el-checkbox-group v-model="checkList">
+			<el-checkbox label="复选框 A"></el-checkbox>
+			<el-checkbox label="复选框 B"></el-checkbox>
+			<el-checkbox label="复选框 C"></el-checkbox>
+			<el-checkbox label="禁用" disabled></el-checkbox>
+			<el-checkbox label="选中且禁用" disabled></el-checkbox>
+		</el-checkbox-group>
+		<span slot="footer" class="dialog-footer">
+			<el-button size="small" @click="updateShop = false">取消</el-button>
+			<el-button size="small" type="primary" @click="submit">确 定</el-button>
+		</span>
+	</el-dialog>
 </div>
 </template>
 <style lang="less" scoped>
@@ -73,6 +87,8 @@
 				},
 				date:[],
 				dataObj:{},					//获取到的信息
+				updateShop:false,			//修改可见商家弹框
+				checkList:[],				//已选中的可见商家
 			}
 		},
 		created(){
@@ -149,6 +165,14 @@
 						message: '取消'
 					});          
 				});
+			},
+			//点击修改可见商家
+			updateStore(){
+				this.updateShop = true;
+			},
+			//修改可见商家
+			submit(){
+
 			}
 			
 		}

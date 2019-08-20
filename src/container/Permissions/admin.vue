@@ -217,7 +217,7 @@
 			submit(){
 				if(this.adminObj.admin_name == ""){
 					this.$message.warning('请填写用户名');
-				}else if(this.adminObj.password == ""){
+				}else if(this.adminObj.password == "" && this.dislogType == 1){
 					this.$message.warning('请填写密码');
 				}else if(this.adminObj.role_id == ""){
 					this.$message.warning('请选择所属角色');

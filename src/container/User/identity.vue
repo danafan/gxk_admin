@@ -69,8 +69,8 @@
 		</el-pagination>
 	</div>
 </el-card>
-<el-dialog title="身份证图片" center :visible.sync="showDialog">
-	<el-carousel trigger="click">
+<el-dialog title="身份证图片" center :visible.sync="showDialog" width="60%">
+	<el-carousel class="hah" trigger="click">
 		<el-carousel-item v-for="item in cardImgList" :key="item">
 			<img class="cardimg" :src="item">
 		</el-carousel-item>
@@ -79,9 +79,15 @@
 </div>
 </template>
 <style lang="less" scoped>
-.el-carousel__item{
-	overflow-x: scroll;
-	overflow-y: scroll;
+.hah{
+	height: 800px !important;
+	.el-carousel__item{
+		height: 800px !important;
+	}
+	.cardimg{
+		width: 100%;
+		height: 800px;
+	}
 }
 </style>
 <script>
