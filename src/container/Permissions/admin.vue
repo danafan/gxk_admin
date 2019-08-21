@@ -75,6 +75,12 @@
 					<el-radio :label="1">是</el-radio>
 				</el-radio-group>
 			</el-form-item>
+			<el-form-item label="可管理用户范围：">
+				<el-radio-group v-model="adminObj.user_range">
+					<el-radio :label="1">仅限下级</el-radio>
+					<el-radio :label="2">全部用户</el-radio>
+				</el-radio-group>
+			</el-form-item>
 			<el-form-item label="是否禁用：" v-if="dislogType == 2">
 				<el-radio-group v-model="adminObj.is_disabled">
 					<el-radio :label="0">否</el-radio>
@@ -123,6 +129,7 @@
 					role_id:"",
 					admin_group:"",
 					system_admin:0,
+					user_range:1,
 					is_disabled:0,
 				},
 				admin_group:[],				//选中的所有关联查看的管理员
@@ -189,6 +196,17 @@
 			createAdmin(){
 				this.dislogType = 1;
 				this.showDialog = true;
+				this.admin_group = [];
+				this.adminObj = {
+					admin_name:"",
+					password:"",
+					phone:"",
+					role_id:"",
+					admin_group:"",
+					system_admin:0,
+					user_range:1,
+					is_disabled:0,
+				}
 			},
 			//点击编辑
 			edior(id){
@@ -200,11 +218,16 @@
 						this.adminObj.password = "";
 						this.adminObj.phone = res.data.data.phone;
 						this.adminObj.role_id = res.data.data.role_id;
-						let list = res.data.data.admin_group.split(',');
+						
 						this.admin_group = [];
-						list.map(l => {
-							this.admin_group.push(parseInt(l));
-						})
+						if(res.data.data.admin_group != ""){
+							let list = res.data.data.admin_group.split(',');
+							list.map(l => {
+								this.admin_group.push(parseInt(l));
+							})
+						}
+						
+						this.adminObj.user_range = res.data.data.user_range;
 						this.adminObj.system_admin = res.data.data.system_admin;
 						this.adminObj.is_disabled = res.data.data.is_disabled;
 						this.showDialog = true;

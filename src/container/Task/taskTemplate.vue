@@ -56,11 +56,7 @@
 	</el-card>
 	<el-dialog title="修改可见商家" center width="50%" :visible.sync="updateShop">
 		<el-checkbox-group v-model="checkList">
-			<el-checkbox label="复选框 A"></el-checkbox>
-			<el-checkbox label="复选框 B"></el-checkbox>
-			<el-checkbox label="复选框 C"></el-checkbox>
-			<el-checkbox label="禁用" disabled></el-checkbox>
-			<el-checkbox label="选中且禁用" disabled></el-checkbox>
+			<el-checkbox :label="item.store_id" v-for="item in storeList">{{item.store_name}}</el-checkbox>
 		</el-checkbox-group>
 		<span slot="footer" class="dialog-footer">
 			<el-button size="small" @click="updateShop = false">取消</el-button>
@@ -88,7 +84,9 @@
 				date:[],
 				dataObj:{},					//获取到的信息
 				updateShop:false,			//修改可见商家弹框
+				storeList:[],
 				checkList:[],				//已选中的可见商家
+				template_id:""
 			}
 		},
 		created(){
@@ -167,12 +165,34 @@
 				});
 			},
 			//点击修改可见商家
-			updateStore(){
-				this.updateShop = true;
+			updateStore(id){
+				this.template_id = id;
+				resource.getTaskShow({template_id:this.template_id}).then(res => {
+					if(res.data.code == 1){
+						this.checkList = res.data.data.choose_store;
+						this.storeList = res.data.data.all_store;
+						this.updateShop = true;
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
 			},
 			//修改可见商家
 			submit(){
-
+				let obj = {
+					template_id:this.template_id,
+					store_ids:this.checkList.join(',')
+				}
+				resource.taskEdit(obj).then(res => {
+					if(res.data.code == 1){
+						this.$message.success(res.data.msg);
+						this.updateShop = false;
+						//获取列表
+						this.getList();
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
 			}
 			
 		}

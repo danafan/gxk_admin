@@ -75,24 +75,13 @@
 	</div>
 </el-card>
 <el-dialog title="银行卡图片" center :visible.sync="showDialog" width="60%">
-	<el-carousel class="hah" trigger="click">
-		<el-carousel-item v-for="item in cardImgList" :key="item">
-			<img class="cardimg" :src="item">
-		</el-carousel-item>
-	</el-carousel>
+	<img class="cardimg" :src="cardImg" @click="rotate" ref="img">
 </el-dialog>
 </div>
 </template>
 <style lang="less" scoped>
-.hah{
-	height: 800px !important;
-	.el-carousel__item{
-		height: 800px !important;
-	}
-	.cardimg{
-		width: 100%;
-		height: 800px;
-	}
+.cardimg{
+	width: 100%;
 }
 </style>
 <script>
@@ -124,7 +113,8 @@
 				date:[],
 				dataObj:{},					//获取到的信息
 				showDialog:false,			//默认弹框不显示
-				cardImgList:[],				//银行卡图片
+				cardImg:"",				//身份证图片
+				current:0,
 			}
 		},
 		created(){
@@ -170,6 +160,17 @@
 				this.cardImgList = [];
 				this.showDialog = true;
 				this.cardImgList.push(row.bank_card_img);
+			},
+			//点击查看某一个银行卡
+			look(row){
+				this.cardImg = row.bank_card_img;
+				this.current = 0;
+				this.showDialog = true;
+			},
+			//点击图片旋转
+			rotate(e){
+				this.current += 90;
+				this.$refs.img.style.transform = 'rotate('+this.current+'deg)';
 			},
 			//审核
 			check(id,status){

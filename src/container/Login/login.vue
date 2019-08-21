@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<el-card class="cardBox">
-			<div class="title">共享客后台登录</div>
+			<div class="title">众帮联盟后台登录</div>
 			<div class="loginForm">
 				<el-input class="input" v-model="request.admin_name" placeholder="请输入账号" @keyup.enter.native="login"></el-input>
 				<el-input class="input" type="password" v-model="request.password" placeholder="请输入密码" @keyup.enter.native="login"></el-input>
@@ -66,14 +66,17 @@
 					password:"",
 					captcha:""
 				},
-				codeUrl:"http://cs.gxk8090.com/admin/admin/captcha",
+				codeUrl:"",
 				i:0
 			}
+		},
+		created(){
+			this.codeUrl = this.captcha;
 		},
 		methods:{
 			getCode(){
 				this.i += 1;
-				this.codeUrl = "http://cs.gxk8090.com/admin/admin/captcha?i=" + this.i;	
+				this.codeUrl = this.codeUrl + `?i=${this.i}`;	
 			},
 			//点击登录
 			login(){

@@ -44,7 +44,8 @@
 			</el-table-column>
 			<el-table-column label="身份证图片" align="center">
 				<template slot-scope="scope">
-					<el-button type="text" size="small" @click="showImg = true">查看</el-button>
+					<el-button type="text" size="small" @click="look(scope.row,1)">正面</el-button>
+					<el-button type="text" size="small" @click="look(scope.row,2)">反面</el-button>
 				</template>
 			</el-table-column>
 			<el-table-column label="操作" align="center">
@@ -92,12 +93,8 @@
 			</el-table-column>
 		</el-table>
 		<!-- 查看身份证图片 -->
-		<el-dialog title="身份证图片" center :visible.sync="showImg">
-			<el-carousel class="hah" trigger="click">
-				<el-carousel-item v-for="item in cardImgList" :key="item">
-					<img class="cardimg" :src="item">
-				</el-carousel-item>
-			</el-carousel>
+		<el-dialog title="身份证图片" center :visible.sync="showImg" width="60%">
+			<img class="cardimg" :src="cardImg" @click="rotate" ref="img">
 		</el-dialog>
 		<!-- 修改接单数 -->
 		<el-dialog title="修改接单数" width="30%" center :visible.sync="showDialog">
@@ -156,15 +153,8 @@
 		}
 	}
 }
-.hah{
-	height: 800px !important;
-	.el-carousel__item{
-		height: 800px !important;
-	}
-	.cardimg{
-		width: 100%;
-		height: 800px;
-	}
+.cardimg{
+	width: 100%;
 }
 
 </style>
@@ -186,7 +176,9 @@
 					month_order_limit:""
 				},
 				wang:"",
-				id:""
+				id:"",
+				cardImg:"",				//身份证图片
+				current:0,
 			}
 		},
 		props:{
@@ -220,6 +212,21 @@
 						this.$message.warning(res.data.msg);
 					}
 				})
+			},
+			//点击查看某一个身份证
+			look(row,type){
+				if(type == 1){
+					this.cardImg = row.id_card_front_img;
+				}else{
+					this.cardImg = row.id_card_back_img;
+				}
+				this.current = 0;
+				this.showImg = true;
+			},
+			//点击图片旋转
+			rotate(e){
+				this.current += 90;
+				this.$refs.img.style.transform = 'rotate('+this.current+'deg)';
 			},
 			//审核
 			check(id,status){

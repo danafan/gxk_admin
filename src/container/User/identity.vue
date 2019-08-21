@@ -38,7 +38,11 @@
 			<el-table-column label="身份证图片" align="center">
 				<template slot-scope="scope">
 					<p v-if="!scope.row.id_card_front_img">暂无</p>
-					<el-button v-else type="text" size="small" @click="look(scope.row)">查看</el-button>
+					<div v-else >
+						<el-button type="text" size="small" @click="look(scope.row,1)">正面</el-button>
+						<el-button type="text" size="small" @click="look(scope.row,2)">反面</el-button>
+					</div>
+					
 				</template>
 			</el-table-column>
 			<el-table-column prop="inviter_id" label="上级账号" align="center">
@@ -69,25 +73,14 @@
 		</el-pagination>
 	</div>
 </el-card>
-<el-dialog title="身份证图片" center :visible.sync="showDialog" width="60%">
-	<el-carousel class="hah" trigger="click">
-		<el-carousel-item v-for="item in cardImgList" :key="item">
-			<img class="cardimg" :src="item">
-		</el-carousel-item>
-	</el-carousel>
+<el-dialog  title="身份证图片" center :visible.sync="showDialog" width="60%">
+	<img class="cardimg" :src="cardImg" @click="rotate" ref="img">
 </el-dialog>
 </div>
 </template>
 <style lang="less" scoped>
-.hah{
-	height: 800px !important;
-	.el-carousel__item{
-		height: 800px !important;
-	}
-	.cardimg{
-		width: 100%;
-		height: 800px;
-	}
+.cardimg{
+	width: 100%;
 }
 </style>
 <script>
@@ -119,7 +112,8 @@
 				date:[],
 				dataObj:{},					//获取到的信息
 				showDialog:false,			//默认弹框不显示
-				cardImgList:[],				//身份证图片
+				cardImg:"",				//身份证图片
+				current:0,
 			}
 		},
 		created(){
@@ -161,11 +155,19 @@
 				})
 			},
 			//点击查看某一个身份证
-			look(row){
-				this.cardImgList = [];
+			look(row,type){
+				if(type == 1){
+					this.cardImg = row.id_card_front_img;
+				}else{
+					this.cardImg = row.id_card_back_img;
+				}
+				this.current = 0;
 				this.showDialog = true;
-				this.cardImgList.push(row.id_card_front_img);
-				this.cardImgList.push(row.id_card_back_img);
+			},
+			//点击图片旋转
+			rotate(e){
+				this.current += 90;
+				this.$refs.img.style.transform = 'rotate('+this.current+'deg)';
 			},
 			//审核
 			check(id,status){

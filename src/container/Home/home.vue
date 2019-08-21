@@ -2,7 +2,7 @@
 	<div class="box">
 		<el-container style="height:100%">
 			<el-header class="header">
-				<div class="gxk">共享客</div>
+				<div class="gxk">众帮联盟</div>
 				<div class="headerRight">
 					<div class="username">{{admin_name}}</div>
 					<div class="line"></div>

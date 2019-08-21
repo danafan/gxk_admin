@@ -11,7 +11,11 @@
 			</div>
 			<div class="temRow">
 				<div class="temLabel">用户接任务间隔时间</div>
-				<div class="temContent">{{req.user_task_time}}小时</div>
+				<div class="temContent">{{req.user_task_time}}</div>
+			</div>
+			<div class="temRow">
+				<div class="temLabel">任务自动取消时间</div>
+				<div class="temContent">{{req.auto_cancel}}</div>
 			</div>
 			<div class="temRow">
 				<div class="temLabel">任务可见商家</div>
@@ -39,7 +43,7 @@
 				<div class="con rowLabel">{{item.step}}</div>
 				<div class="con">{{item.commission}}</div>
 				<div class="con">{{item.shangji_commission}}</div>
-				<div class="con">{{item.time}}小时</div>
+				<div class="con">{{item.time}}</div>
 				<div class="con">{{item.check_type}}</div>
 				<div class="con">{{item.image}}</div>
 			</div>

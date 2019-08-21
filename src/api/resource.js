@@ -102,6 +102,8 @@ let path = {
 	setTag:'user/settag',									//设置用户标签
 	wangwangForbid:'user/wangwangforbid',					//旺旺号起禁用
 	tasklook:'task/tasklook',								//查看该模版流程
+	getTaskShow:'task/taskshow',							//修改模版可见商家
+	taskEdit:'task/taskedit',								//修改模版可见商家
 
 }				
 export default{
@@ -536,6 +538,14 @@ export default{
 	//查看模版详情
 	tasklook(params){
 		return http.get(path.tasklook, params)
+	},
+	//修改模版可见商家
+	getTaskShow(params){
+		return http.get(path.getTaskShow, params)
+	},
+	//修改模版可见商家
+	taskEdit(params){
+		return http.post(path.taskEdit, params)
 	},
 }
 
