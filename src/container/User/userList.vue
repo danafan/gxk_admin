@@ -69,6 +69,8 @@
 				<el-button type="text" size="small" @click="setPeople(scope.row.phone)">邀请</el-button>
 				<el-button type="text" size="small" @click="$router.push('/userDetail?phone=' + scope.row.phone)">查看</el-button>
 				<el-button type="text" size="small" @click="userAndTag(scope.row.user_id)">标签</el-button>
+				<el-button type="text" size="small" @click="updateWang(scope.row.user_id)">旺旺号</el-button>
+				<el-button type="text" size="small" @click="getTemplate(scope.row.user_id)">任务</el-button>
 			</template>
 		</el-table-column>
 	</el-table>
@@ -153,6 +155,38 @@
 		<el-button size="small" type="primary" @click="submitTag">确 定</el-button>
 	</span>
 </el-dialog>
+<!-- 设置旺旺号 -->
+<el-dialog title="旺旺号设置" center width="30%" :visible.sync="showWang">
+	<div class="dialogItem">
+		<div class="itemLabel">当前限定数量：</div>
+		<div class="itemContent">{{wangObj.wangwang_num_limit}}</div>
+	</div>
+	<div class="dialogItem">
+		<div class="itemLabel">当前绑定数量：</div>
+		<div class="itemContent">{{wangObj.num}}</div>
+	</div>
+	<div class="dialogItem">
+		<div class="itemLabel">修改限定数量：</div>
+		<el-input type="number" size="small" style="width: 150px" v-model="wangNum">
+		</el-input>
+	</div>
+	<span slot="footer" class="dialog-footer">
+		<el-button size="small" @click="showWang = false">取消</el-button>
+		<el-button size="small" type="primary" @click="submitWang">确 定</el-button>
+	</span>
+</el-dialog>
+<!-- 设置模版 -->
+<el-dialog title="修改用户可接任务模版" center width="30%" :visible.sync="showTemplate">
+	<div>
+		<el-checkbox-group v-model="userTemList">
+			<el-checkbox :label="item.template_id" v-for="item in templateList">{{item.template_shop_name}}</el-checkbox>
+		</el-checkbox-group>
+	</div>
+	<span slot="footer" class="dialog-footer">
+		<el-button size="small" @click="showTemplate = false">取消</el-button>
+		<el-button size="small" type="primary" @click="updateTemplate">确 定</el-button>
+	</span>
+</el-dialog>
 </div>
 </template>
 <style lang="less" scoped>
@@ -200,6 +234,12 @@
 				tags:[],					//所有标签
 				userTagIds:[],				//用户选中的标签id
 				user_id:"",					//选中的userid
+				showWang:false,				//默认修改旺旺号数量弹框不显示
+				wangNum:"",					//填写的修改旺旺数量
+				wangObj:{},					//某一个用户的旺旺号数量限制
+				showTemplate:false,			//用户可见模版弹框
+				templateList:[],			//可见模版列表
+				userTemList:[],				///选中的模版列表
 			}
 		},
 		created(){
@@ -207,7 +247,6 @@
 			this.getJobList();
 			//获取列表
 			this.getList();
-
 		},
 		watch:{
 			date1:function(n){
@@ -394,7 +433,72 @@
 						this.$message.warning(res.data.msg);
 					}
 				})
+			},
+			//点击旺旺号
+			updateWang(id){
+				this.wangNum = "";
+				this.user_id = id;
+				resource.getWangNum({user_id:this.user_id}).then(res => {
+					if(res.data.code == 1){
+						this.wangObj = res.data.data;
+						this.showWang = true;
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
+			},
+			//点击提交
+			submitWang(){
+				if(this.wangNum == ''){
+					this.$message.warning("请输入限定数量");
+				}else if(parseInt(this.wangNum) < parseInt(this.wangObj.num)){
+					this.$message.warning("限定数量不能少于当前绑定数量");
+				}else{
+					let req = {
+						user_id:this.user_id,
+						num:this.wangNum 
+					}
+					resource.postWangNum(req).then(res => {
+						if(res.data.code == 1){
+							this.showWang = false;
+							this.$message.success(res.data.msg);
+						}else{
+							this.$message.warning(res.data.msg);
+						}
+					})
+				}
+			},
+			//点击任务
+			getTemplate(id){
+				this.user_id = id;
+				resource.getChooseTemplate({user_id:this.user_id}).then(res => {
+					if(res.data.code == 1){
+						this.templateList = res.data.data.head;
+						this.userTemList = res.data.data.tail;
+						this.showTemplate = true;
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
+			},
+			//提交
+			updateTemplate(){
+				let req = {
+					user_id:this.user_id,
+					ids:this.userTemList.join(',')
+				}
+				resource.postChooseTemplate(req).then(res => {
+					if(res.data.code == 1){
+						this.$message.success(res.data.msg);
+						this.showTemplate = false;
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
 			}
+
+
+
 			
 		}
 

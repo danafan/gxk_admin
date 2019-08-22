@@ -192,6 +192,7 @@
 			//获取列表
 			this.getList();
 		},
+		inject:['reload'],
 		props:{
 			phone:{
 				type:String,

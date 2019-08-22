@@ -104,6 +104,8 @@ let path = {
 	tasklook:'task/tasklook',								//查看该模版流程
 	getTaskShow:'task/taskshow',							//修改模版可见商家
 	taskEdit:'task/taskedit',								//修改模版可见商家
+	wangNum:'user/wangwangnumlimit',						//修改用户可绑定的旺旺号数量
+	chooseTemplate:'user/userchoosetemplate',				//修改用户选择的模版
 
 }				
 export default{
@@ -546,6 +548,22 @@ export default{
 	//修改模版可见商家
 	taskEdit(params){
 		return http.post(path.taskEdit, params)
+	},
+	//获取用户可绑定的旺旺号数量
+	getWangNum(params){
+		return http.get(path.wangNum, params)
+	},
+	//修改用户可绑定的旺旺号数量
+	postWangNum(params){
+		return http.post(path.wangNum, params)
+	},
+	//获取用户选择的模版
+	getChooseTemplate(params){
+		return http.get(path.chooseTemplate, params)
+	},
+	//修改用户选择的模版
+	postChooseTemplate(params){
+		return http.post(path.chooseTemplate, params)
 	},
 }
 
