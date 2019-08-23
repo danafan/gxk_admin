@@ -33,8 +33,8 @@
 			</el-table-column>
 			<el-table-column prop="statement_type" label="交易类型" align="center">
 			</el-table-column>
-			<el-table-column prop="balance_usable" label="金额（元）" align="center">
-			</el-table-column>
+			<!-- <el-table-column prop="balance_usable" label="金额（元）" align="center">
+			</el-table-column> -->
 			<el-table-column prop="residue_balance_usable" label="余额（元）" align="center">
 			</el-table-column>
 			<el-table-column prop="remark" label="备注" align="center">

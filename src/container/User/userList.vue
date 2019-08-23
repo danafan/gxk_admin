@@ -178,7 +178,9 @@
 <!-- 设置模版 -->
 <el-dialog title="修改用户可接任务模版" center width="30%" :visible.sync="showTemplate">
 	<div>
-		<el-checkbox-group v-model="userTemList">
+		<el-checkbox v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+		<div style="margin: 15px 0;"></div>
+		<el-checkbox-group v-model="userTemList" @change="handleCheckedCitiesChange">
 			<el-checkbox :label="item.template_id" v-for="item in templateList">{{item.template_shop_name}}</el-checkbox>
 		</el-checkbox-group>
 	</div>
@@ -239,7 +241,9 @@
 				wangObj:{},					//某一个用户的旺旺号数量限制
 				showTemplate:false,			//用户可见模版弹框
 				templateList:[],			//可见模版列表
-				userTemList:[],				///选中的模版列表
+				userTemList:[],			//选中的模版列表
+				isIndeterminate: true,
+				checkAll: false,
 			}
 		},
 		created(){
@@ -473,19 +477,46 @@
 				this.user_id = id;
 				resource.getChooseTemplate({user_id:this.user_id}).then(res => {
 					if(res.data.code == 1){
+						this.userTemList = [];
 						this.templateList = res.data.data.head;
-						this.userTemList = res.data.data.tail;
+						var tail = res.data.data.tail;
+						if(tail === 0){
+							this.checkAll = true;
+							this.templateList.map(item => {
+								this.userTemList.push(item.template_id);
+							}) 
+						}else if(tail === -1){
+							this.checkAll = false;
+							this.userTemList = []; 
+						}else{
+							this.checkAll = false;
+							this.userTemList = tail;
+						}
 						this.showTemplate = true;
 					}else{
 						this.$message.warning(res.data.msg);
 					}
 				})
 			},
+			handleCheckAllChange(val) {
+				if(val){
+					this.templateList.map(item => {
+						this.userTemList.push(item.template_id);
+					})
+				}else{
+					this.userTemList = [];
+				}
+			},
+			handleCheckedCitiesChange(value) {
+				let checkedCount = value.length;
+				this.checkAll = checkedCount === this.templateList.length;
+			},
 			//提交
 			updateTemplate(){
+
 				let req = {
 					user_id:this.user_id,
-					ids:this.userTemList.join(',')
+					template_ids:this.checkAll?0:this.userTemList.length == 0?-1:this.userTemList.join(',')
 				}
 				resource.postChooseTemplate(req).then(res => {
 					if(res.data.code == 1){
