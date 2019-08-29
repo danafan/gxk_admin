@@ -36,8 +36,10 @@
 						<el-breadcrumb-item v-for="item in levelList">{{item.name}}</el-breadcrumb-item>
 					</el-breadcrumb>
 				</el-card>
-				
-				<router-view></router-view>
+				<keep-alive>
+					<router-view v-if="$route.meta.keepAlive"></router-view>
+				</keep-alive>
+				<router-view v-if="!$route.meta.keepAlive"></router-view>
 			</el-main>
 		</el-container>
 	</el-container>

@@ -25,6 +25,11 @@
 							<img class="fu" v-if="serviceMoney.length > 1" src="../../assets/jian.png" @click="jian(index)">
 						</div>
 					</el-form-item>
+					<el-form-item label="推广佣金：">
+						<el-input style="width: 200px;" type="number" v-model="req.tuiguang_commission">
+							<template slot="append">元</template>
+						</el-input>
+					</el-form-item>
 					<el-form-item label="用户接任务间隔时间：">
 						<el-input style="width: 100px;" v-model="time" placeholder="间隔时间"></el-input>
 						<el-select v-model="timeType" style="width: 100px;">
@@ -126,6 +131,10 @@
 						<div class="temLabel">服务费（元）</div>
 						<div class="temContent">{{detailServiceList.join(',')}}</div>
 					</div>
+					<div class="temRow">
+						<div class="temLabel">推广佣金（元）</div>
+						<div class="temContent">{{req.tuiguang_commission}}</div>
+					</div>
 				</div>
 				<div class="tabList">
 					<div class="tabTitle1">
@@ -209,6 +218,7 @@
 			}
 		}
 	}
+
 }
 .temlist{
 	border-top: 1px solid #ccc;
@@ -293,6 +303,7 @@
 					shop_template_ids:"",
 					desc:"",
 					step:{},
+					tuiguang_commission:""
 				},									//参数
 				serviceMoney:[{
 					charge_begin:"",
@@ -425,6 +436,11 @@
 					}
 				}
 				this.req.charge = this.serviceMoney;
+				// 处理推广佣金
+				if(this.req.tuiguang_commission == ""){
+					this.$message.warning("请输入推广佣金");
+					return;
+				}
 				// 处理间隔时间
 				if(this.time == ""){
 					this.$message.warning("请输入接任务间隔时间");
@@ -503,6 +519,7 @@
 						shop_template_ids:this.req.shop_template_ids,
 						charge:this.req.charge,
 						desc:this.req.desc,
+						tuiguang_commission:this.req.tuiguang_commission
 					}
 					let req = {
 						template_info:JSON.stringify(obj1),

@@ -242,7 +242,6 @@
 				showTemplate:false,			//用户可见模版弹框
 				templateList:[],			//可见模版列表
 				userTemList:[],			//选中的模版列表
-				isIndeterminate: true,
 				checkAll: false,
 			}
 		},
@@ -513,7 +512,6 @@
 			},
 			//提交
 			updateTemplate(){
-
 				let req = {
 					user_id:this.user_id,
 					template_ids:this.checkAll?0:this.userTemList.length == 0?-1:this.userTemList.join(',')

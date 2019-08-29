@@ -55,7 +55,8 @@
 		</div>
 	</el-card>
 	<el-dialog title="修改可见商家" center width="50%" :visible.sync="updateShop">
-		<el-checkbox-group v-model="checkList">
+		<el-checkbox v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+		<el-checkbox-group v-model="checkList" @change="handleCheckedCitiesChange">
 			<el-checkbox :label="item.store_id" v-for="item in storeList">{{item.store_name}}</el-checkbox>
 		</el-checkbox-group>
 		<span slot="footer" class="dialog-footer">
@@ -86,7 +87,8 @@
 				updateShop:false,			//修改可见商家弹框
 				storeList:[],
 				checkList:[],				//已选中的可见商家
-				template_id:""
+				template_id:"",
+				checkAll: false,
 			}
 		},
 		created(){
@@ -169,19 +171,44 @@
 				this.template_id = id;
 				resource.getTaskShow({template_id:this.template_id}).then(res => {
 					if(res.data.code == 1){
-						this.checkList = res.data.data.choose_store;
 						this.storeList = res.data.data.all_store;
+						var tail = res.data.data.choose_store;
+						if(tail === 0){
+							this.checkAll = true;
+							this.storeList.map(item => {
+								this.checkList.push(item.store_id);
+							}) 
+						}else if(tail.length === 0){
+							this.checkAll = false;
+							this.checkList = []; 
+						}else{
+							this.checkAll = false;
+							this.checkList = tail;
+						}
 						this.updateShop = true;
 					}else{
 						this.$message.warning(res.data.msg);
 					}
 				})
 			},
+			handleCheckAllChange(val) {
+				if(val){
+					this.storeList.map(item => {
+						this.checkList.push(item.store_id);
+					})
+				}else{
+					this.checkList = [];
+				}
+			},
+			handleCheckedCitiesChange(value) {
+				let checkedCount = value.length;
+				this.checkAll = checkedCount === this.storeList.length;
+			},
 			//修改可见商家
 			submit(){
 				let obj = {
 					template_id:this.template_id,
-					store_ids:this.checkList.join(',')
+					store_ids:this.checkAll?0:this.checkList.length == 0?"-1":this.checkList.join(',')
 				}
 				resource.taskEdit(obj).then(res => {
 					if(res.data.code == 1){

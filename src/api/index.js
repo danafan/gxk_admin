@@ -6,7 +6,7 @@ const instance = axios.create({
   baseURL,
 });
 
-instance.interceptors.response.use(function (response) {
+instance.interceptors.response.use(response => {
   switch (response.data.code) {
     case 400:
     sessionStorage.clear();

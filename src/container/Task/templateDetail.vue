@@ -29,6 +29,10 @@
 				<div class="temLabel">服务费（元）</div>
 				<div class="temContent">{{req.charge_str}}</div>
 			</div>
+			<div class="temRow">
+				<div class="temLabel">推广佣金（元）</div>
+				<div class="temContent">{{req.tuiguang_commission}}</div>
+			</div>
 		</div>
 		<div class="tabList">
 			<div class="tabTitle1">
