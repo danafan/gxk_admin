@@ -18,9 +18,6 @@
 					<el-button type="primary" @click="search">搜索</el-button>
 				</el-form-item>
 			</el-form>
-			<div class="but">
-				<el-button type="primary" icon="el-icon-download" size="small">导出</el-button>
-			</div>
 			<el-table :data="dataObj.data" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}" :default-sort = "{prop: 'completeTime'}">
 				<el-table-column prop="template_shop_name" label="模版名称" align="center">
 				</el-table-column>

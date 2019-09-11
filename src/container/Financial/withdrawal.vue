@@ -32,7 +32,7 @@
 			</el-form-item>
 		</el-form>
 		<div class="but">
-			<el-button type="primary" icon="el-icon-download" size="small">导出</el-button>
+			<el-button type="primary" icon="el-icon-download" size="small" @click="dao">导出</el-button>
 		</div>
 		<el-table :data="dataObj.data" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}" :default-sort = "{prop: 'completeTime'}">
 			<el-table-column prop="apply_time" label="提交时间" align="center">
@@ -116,19 +116,23 @@
 	</div>
 	<div class="dialogItem">
 		<div class="itemLabel">提现方式：</div>
-		<div class="itemContent" v-if="detailObj.withdrawal_method == 1">微信</div>
-		<div class="itemContent" v-if="detailObj.withdrawal_method == 2">银行卡</div>
+		<div class="itemContent" v-if="detailObj.withdrawal_method == 1">银行卡</div>
+		<div class="itemContent" v-if="detailObj.withdrawal_method == 2">微信</div>
 	</div>
-	<div class="dialogItem">
+	<div class="dialogItem" v-if="detailObj.withdrawal_method == 1">
 		<div class="itemLabel">提现银行：</div>
 		<div class="itemContent">{{detailObj.bank_name}}</div>
 	</div>
-	<div class="dialogItem">
+	<div class="dialogItem" v-if="detailObj.withdrawal_method == 1">
 		<div class="itemLabel">银行卡号：</div>
 		<div class="itemContent">{{detailObj.bank_card}}</div>
 	</div>
-	<div class="dialogItem">
+	<div class="dialogItem" v-if="detailObj.withdrawal_method == 1">
 		<div class="itemLabel">银行卡实名：</div>
+		<div class="itemContent">{{detailObj.name}}</div>
+	</div>
+	<div class="dialogItem" v-if="detailObj.withdrawal_method == 2">
+		<div class="itemLabel">微信昵称：</div>
 		<div class="itemContent">{{detailObj.name}}</div>
 	</div>
 	<div class="dialogItem">
@@ -189,6 +193,7 @@
 </style>
 <script>
 	import resource from '../../api/resource.js'
+	import exportup from '../../api/export.js'
 	export default{
 		data(){
 			return{
@@ -299,6 +304,17 @@
 						this.$message.warning(res.data.msg);
 					}
 				})
+			},
+			//预约下载
+			dao(){
+				var arr = {};
+				for(let a in this.req){
+					if(a != 'page' && a != 'pagesize' && this.req[a] != ''){
+						arr[a] = this.req[a];
+					}
+				}
+				arr.index = 1;
+				exportup.exportUp(arr)
 			}
 			
 		}

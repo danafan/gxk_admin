@@ -148,7 +148,7 @@
 					<div class="tabRow" v-for="item in processedStep">
 						<div class="con rowLabel">{{item.title}}</div>
 						<div class="con">{{item.stepInfo[0].value}}</div>
-						<div class="con">{{item.stepInfo[4].value}}</div>
+						<div class="con">{{item.title == '搜索下单'?item.stepInfo[6].value:item.stepInfo[4].value}}</div>
 						<div class="con">{{item.stepInfo[2].value/item.stepInfo[2].time}}{{item.stepInfo[2].time == 1?'秒':item.stepInfo[2].time == 60?'分钟':'小时'}}</div>
 						<div class="con">{{item.stepInfo[1].list[parseInt(item.stepInfo[1].value)].name}}</div>
 						<div class="con">{{item.stepInfo[3].list[parseInt(item.stepInfo[3].value)].name}}</div>
@@ -372,7 +372,21 @@
 				if(obj.step_name == '下单'){
 					for(let i = 0;i < this.processedStep.length;i ++){
 						if(this.processedStep[i].title == '下单'){
-							this.$message.warning("任务步骤【下单】只能选择一次");
+							this.$message.warning("【下单】只能选择一次");
+							return;
+						}else if(this.processedStep[i].title == '搜索下单'){
+							this.$message.warning("【下单】和【搜索下单】只能选择一个");
+							return;
+						}
+					}
+				}
+				if(obj.step_name == '搜索下单'){
+					for(let i = 0;i < this.processedStep.length;i ++){
+						if(this.processedStep[i].title == '搜索下单'){
+							this.$message.warning("【搜索下单】只能选择一次");
+							return;
+						}else if(this.processedStep[i].title == '下单'){
+							this.$message.warning("【下单】和【搜索下单】只能选择一个");
 							return;
 						}
 					}
@@ -485,6 +499,7 @@
 					step_ids.push(sid);
 					this.req.step[i+1] = arr;
 				}
+				console.log(this.processedStep);
 				this.req.step_ids = step_ids.join(',');
 				//处理第二页的可见商家
 				this.detailStoreList = [];

@@ -4,6 +4,7 @@ import Router from 'vue-router'
 const login = resolve=>require(['@/container/Login/login'],resolve)
 const home = resolve=>require(['@/container/Home/home'],resolve)
 const index = resolve=>require(['@/container/Index/index'],resolve)
+const message = resolve=>require(['@/container/Index/message'],resolve)
 const platformRecord = resolve=>require(['@/container/Financial/platformRecord'],resolve)
 const withdrawal = resolve=>require(['@/container/Financial/withdrawal'],resolve)
 const userList = resolve=>require(['@/container/User/userList'],resolve)
@@ -45,6 +46,7 @@ const router = new Router({
     component: home,
     children:[
     { path: '/index',name:"首页列表", component: index},
+    { path: '/message',name:"消息列表", component: message},
     { path: '/platformRecord',name:"资金记录", component: platformRecord},
     { path: '/withdrawal',name:"提现记录", component: withdrawal},
     { path: '/userList',name:"用户列表", component: userList,meta:{keepAlive:true}},

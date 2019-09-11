@@ -30,6 +30,13 @@
 						<div class="money">{{indexData.orderTotal}}</div>
 					</div>
 				</div>
+				<div class="infoItem">
+					<img class="infoIcon" src="../../assets/ico-jrcwss.png">
+					<div class="infoText">
+						<div class="title">本月收入</div>
+						<div class="money">{{indexData.thisMonthIncome}}</div>
+					</div>
+				</div>
 			</div>
 			<div class="processed">
 				<div class="processedTitle">待处理事务</div>

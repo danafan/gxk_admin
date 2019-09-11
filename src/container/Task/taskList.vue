@@ -40,9 +40,6 @@
 				<el-button type="primary" @click="search">搜索</el-button>
 			</el-form-item>
 		</el-form>
-		<div class="but">
-			<el-button type="primary" icon="el-icon-download" size="small">导出</el-button>
-		</div>
 		<el-table :data="dataObj.data" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}" :default-sort = "{prop: 'completeTime'}">
 			<el-table-column prop="commit_time" label="商家/店铺" align="center">
 				<template slot-scope="scope">

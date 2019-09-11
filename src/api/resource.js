@@ -106,6 +106,8 @@ let path = {
 	taskEdit:'task/taskedit',								//修改模版可见商家
 	wangNum:'user/wangwangnumlimit',						//修改用户可绑定的旺旺号数量
 	chooseTemplate:'user/userchoosetemplate',				//修改用户选择的模版
+	messageList:'index/mymsg',								//消息列表
+	exportUp:'export/export',								//预约下载
 
 }				
 export default{
@@ -564,6 +566,14 @@ export default{
 	//修改用户选择的模版
 	postChooseTemplate(params){
 		return http.post(path.chooseTemplate, params)
+	},
+	//消息列表
+	messageList(params){
+		return http.get(path.messageList, params)
+	},
+	//预下载
+	exportUp(params){
+		return http.get(path.exportUp, params)
 	},
 }
 
