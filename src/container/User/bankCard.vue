@@ -171,26 +171,52 @@
 			},
 			//审核
 			check(id,status){
-				this.$confirm(`确认${status == '1'?'通过':'拒绝'}?`, '提示', {
-					confirmButtonText: '确定',
-					cancelButtonText: '取消',
-					type: 'warning'
-				}).then(() => {
-					resource.checkBank({id:id,check_status:status}).then(res => {
-						if(res.data.code == 1){
-							this.$message.success(res.data.msg);
+				if(status == '1'){
+					this.$confirm('确认通过?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						resource.checkBank({id:id,check_status:status}).then(res => {
+							if(res.data.code == 1){
+								this.$message.success(res.data.msg);
 							//获取列表
 							this.getList();
 						}else{
 							this.$message.warning(res.data.msg);
 						}
 					})
-				}).catch(() => {
-					this.$message({
-						type: 'info',
-						message: '取消'
-					});          
-				});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '取消'
+						});          
+					});
+				}else{
+					this.$prompt('拒绝原因', '确认拒绝？', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消'
+					}).then(({ value }) => {
+						if(value){
+							resource.checkBank({id:id,check_status:status,reject_reason:value}).then(res => {
+								if(res.data.code == 1){
+									this.$message.success(res.data.msg);
+									//获取列表
+									this.getList();
+								}else{
+									this.$message.warning(res.data.msg);
+								}
+							})
+						}else{
+							this.$message.warning("请输入拒绝原因");
+						}
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '取消'
+						});       
+					});
+				}
 			}
 			
 		}

@@ -5,7 +5,8 @@ let path = {
 	getIndex:'index/index',									//首页信息
 	getBankInfo:'system/getbankcardinfo',					//获取银行卡信息
 	updateBank:'system/bankcardupdate',						//修改银行卡
-	getStoreList:'store/storelist',							//获取商家列表
+	getStoreList:'store/storelist',							//获取商家列表（分页）
+	getStoreList2:'store/storelist2',						//获取商家列表（不分页）
 	setStatus:'store/setstatus',							//设置商家状态
 	addStore:'store/add',									//添加商家
 	getStoreInfo:'store/getstoreinfo',						//商家详情
@@ -108,6 +109,9 @@ let path = {
 	chooseTemplate:'user/userchoosetemplate',				//修改用户选择的模版
 	messageList:'index/mymsg',								//消息列表
 	exportUp:'export/export',								//预约下载
+	alipayCheck:'user/alipayacount',						//支付宝审核
+	getStoreNum:'store/storedata',							//获取商家数据
+	checkAlipay:'user/alipaycounthandle',					//审核支付宝
 
 }				
 export default{
@@ -131,9 +135,13 @@ export default{
 	updateBank(params){
 		return http.post(path.updateBank, params)
 	},
-	//商家列表
+	//商家列表（分页）
 	getStoreList(params){
 		return http.get(path.getStoreList, params)
+	},
+	//商家列表（不分页）
+	getStoreList2(params){
+		return http.get(path.getStoreList2, params)
 	},
 	//设置商家状态
 	setStatus(params){
@@ -574,6 +582,18 @@ export default{
 	//预下载
 	exportUp(params){
 		return http.get(path.exportUp, params)
+	},
+	//支付宝审核
+	alipayCheck(params){
+		return http.get(path.alipayCheck, params)
+	},
+	//获取商家数据
+	getStoreNum(params){
+		return http.get(path.getStoreNum, params)
+	},
+	//审核支付宝
+	checkAlipay(params){
+		return http.get(path.checkAlipay, params)
 	},
 }
 

@@ -33,6 +33,18 @@
 					<div class="tabLabel">性别</div>
 					<div class="tabContent">{{part1.sex}}</div>
 				</div>
+				<div class="row">
+					<div class="tabLabel">QQ号</div>
+					<div class="tabContent">{{part1.qq}}</div>
+					<div class="tabLabel">微信号</div>
+					<div class="tabContent">{{part1.wx}}</div>
+				</div>
+				<div class="row">
+					<div class="tabLabel">支付宝账号</div>
+					<div class="tabContent">{{part1.zhifubao}}</div>
+					<!-- <div class="tabLabel">微信号</div>
+					<div class="tabContent">{{part1.wx}}</div> -->
+				</div>
 			</div>
 		</div>
 		<el-table :data="part2" size="small" border style="width: 100%;margin-top: 50px" align="center" :header-cell-style="{'background':'#f4f4f4'}">

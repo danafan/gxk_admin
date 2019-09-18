@@ -18,6 +18,17 @@
 					end-placeholder="结束时间">
 				</el-date-picker>
 			</el-form-item>
+
+			<el-form-item label="用户名：">
+				<el-input v-model="req.user_name" placeholder="请输入用户名"></el-input>
+			</el-form-item>
+			<el-form-item label="旺旺号：">
+				<el-input v-model="req.wangwang" placeholder="请输入旺旺号"></el-input>
+			</el-form-item>
+			<el-form-item label="审核人：">
+				<el-input v-model="req.check_name" placeholder="请输入审核人"></el-input>
+			</el-form-item>
+
 			<el-form-item>
 				<el-button type="primary" @click="search">搜索</el-button>
 			</el-form-item>
@@ -117,7 +128,10 @@
 					size:10,
 					status:"",
 					bind_begin_time:"",
-					bind_end_time:""
+					bind_end_time:"",
+					user_name:"",
+					wangwang:"",
+					check_name:""
 				},
 				date:[],
 				dataObj:{},					//获取到的信息
@@ -198,28 +212,55 @@
 			},
 			//审核
 			check(id,status){
-				this.$confirm(`确认${status == '1'?'通过':'拒绝'}?`, '提示', {
-					confirmButtonText: '确定',
-					cancelButtonText: '取消',
-					type: 'warning'
-				}).then(() => {
-					resource.checkWang({id:id,check_status:status}).then(res => {
-						if(res.data.code == 1){
-							this.$message.success(res.data.msg);
-							//获取列表
-							this.getList();
+				if(status == '1'){
+					this.$confirm('确认通过?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						resource.checkWang({id:id,check_status:status}).then(res => {
+							if(res.data.code == 1){
+								this.$message.success(res.data.msg);
+								//获取列表
+								this.getList();
+							}else{
+								this.$message.warning(res.data.msg);
+							}
+						})
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '取消'
+						});          
+					});
+				}else{
+					this.$prompt('拒绝原因', '确认拒绝？', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消'
+					}).then(({ value }) => {
+						if(value){
+
+							resource.checkWang({id:id,check_status:status,reject_reason:value}).then(res => {
+								if(res.data.code == 1){
+									this.$message.success(res.data.msg);
+									//获取列表
+									this.getList();
+								}else{
+									this.$message.warning(res.data.msg);
+								}
+							})
 						}else{
-							this.$message.warning(res.data.msg);
+							this.$message.warning("请输入拒绝原因");
 						}
-					})
-				}).catch(() => {
-					this.$message({
-						type: 'info',
-						message: '取消'
-					});          
-				});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '取消'
+						});       
+					});
+				}
 			},
-			//启/禁用
+			//启、禁用
 			setting(id,status){
 				this.$confirm(`确认${status == '1'?'启用':'禁用'}?`, '提示', {
 					confirmButtonText: '确定',

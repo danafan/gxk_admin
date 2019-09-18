@@ -19,6 +19,9 @@
 						<el-option label="任务终止" value="3"></el-option>
 					</el-select>
 				</el-form-item>
+				<el-form-item label="商品ID：">
+					<el-input v-model="req.goods_id" placeholder="请输入商家ID"></el-input>
+				</el-form-item>
 				<el-form-item label="任务完成情况：">
 					<el-select v-model="req.task_finish_status" filterable placeholder="请选择">
 						<el-option label="不限" value=""></el-option>
@@ -47,6 +50,8 @@
 				</template>
 			</el-table-column>
 			<el-table-column prop="task_name" label="任务名称" align="center">
+			</el-table-column>
+			<el-table-column prop="goods_id" label="商品ID" align="center">
 			</el-table-column>
 			<el-table-column label="任务时间" align="center">
 				<template slot-scope="scope">
@@ -111,6 +116,7 @@
 					task_type:"",
 					task_status:"",
 					task_finish_status:"",
+					goods_id:"",
 					task_begin_time:"",
 					task_end_time:"",
 				},

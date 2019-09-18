@@ -39,7 +39,7 @@
 		</el-form-item>
 	</el-form>
 	<div class="but">
-		<el-button type="primary" icon="el-icon-download" size="small">导出</el-button>
+		<el-button type="primary" icon="el-icon-download" size="small" @click="exportUp">导出</el-button>
 	</div>
 	<el-table :data="dataObj.data" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}">
 		<el-table-column prop="phone" label="用户账号" align="center">
@@ -205,6 +205,7 @@
 </style>
 <script>
 	import resource from '../../api/resource.js'
+	import exportUp from '../../api/export.js'
 	export default{
 		data(){
 			return{
@@ -524,6 +525,17 @@
 						this.$message.warning(res.data.msg);
 					}
 				})
+			},
+			//预约下载
+			exportUp(){
+				var arr = {};
+				for(let a in this.req){
+					if(a != 'page' && a != 'size' && this.req[a] != ''){
+						arr[a] = this.req[a];
+					}
+				}
+				arr.index = 2;
+				exportUp.exportUp(arr)
 			}
 
 

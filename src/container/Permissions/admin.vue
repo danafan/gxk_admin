@@ -87,6 +87,11 @@
 					<el-radio :label="1">是</el-radio>
 				</el-radio-group>
 			</el-form-item>
+			<el-form-item label="可查看商家：">
+				<el-checkbox-group v-model="storeIds">
+					<el-checkbox v-for="item in storeList" :label="item.store_id">{{item.store_name}}</el-checkbox>
+				</el-checkbox-group>
+			</el-form-item>
 		</el-form>
 		<span slot="footer" class="dialog-footer">
 			<el-button size="small" @click="showDialog = false">取消</el-button>
@@ -114,6 +119,7 @@
 			return{
 				roleList:[],				//角色列表
 				adminList:[],				//管理员列表
+				storeList:[],				//商家列表
 				req:{
 					page:1,
 					pagesize:10,
@@ -131,9 +137,11 @@
 					system_admin:0,
 					user_range:1,
 					is_disabled:0,
+					store_group:""
 				},
 				admin_group:[],				//选中的所有关联查看的管理员
 				id:"",						//点击的管理员
+				storeIds:[],				//选中的可见商家数组
 			}
 		},
 		created(){
@@ -143,6 +151,8 @@
 			this.roleList2();
 			//获取管理员列表
 			this.adminList2();
+			//获取商家列表
+			this.getStoreList();
 		},
 		methods:{
 			//获取角色列表
@@ -160,6 +170,16 @@
 				resource.adminList2().then(res => {
 					if(res.data.code == 1){
 						this.adminList = res.data.data;
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
+			},
+			//获取商家列表
+			getStoreList(){
+				resource.getStoreList2().then(res => {
+					if(res.data.code == 1){
+						this.storeList = res.data.data;
 					}else{
 						this.$message.warning(res.data.msg);
 					}
@@ -206,6 +226,7 @@
 					system_admin:0,
 					user_range:1,
 					is_disabled:0,
+					store_group:""
 				}
 			},
 			//点击编辑
@@ -226,7 +247,15 @@
 								this.admin_group.push(parseInt(l));
 							})
 						}
-						
+
+						this.storeIds = [];
+						if(res.data.data.store_group.length > 0){
+							let list = res.data.data.store_group;
+							list.map(l => {
+								this.storeIds.push(parseInt(l));
+							})
+						}
+
 						this.adminObj.user_range = res.data.data.user_range;
 						this.adminObj.system_admin = res.data.data.system_admin;
 						this.adminObj.is_disabled = res.data.data.is_disabled;
@@ -246,6 +275,7 @@
 					this.$message.warning('请选择所属角色');
 				}else{
 					this.adminObj.admin_group = this.admin_group.join(',');
+					this.adminObj.store_group = this.storeIds.join(',');
 					if(this.dislogType == 1){
 						resource.addAdmin(this.adminObj).then(res => {
 							if(res.data.code == 1){

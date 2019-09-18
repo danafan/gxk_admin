@@ -53,6 +53,10 @@
 			</el-table-column>
 			<el-table-column prop="order_id" label="订单编号" align="center">
 			</el-table-column>
+			<el-table-column prop="outer_order_sn" label="外部订单号" align="center">
+			</el-table-column>
+			<el-table-column prop="shop_name" label="店铺名称" align="center">
+			</el-table-column>
 			<el-table-column prop="store_name" label="发布商家" align="center">
 			</el-table-column>
 			<el-table-column label="订单金额（元）" align="center">
@@ -60,6 +64,7 @@
 					<span>商品价格：{{scope.row.goods_price}}</span>
 					<span>付款金额：{{scope.row.pay_amount}}</span>
 					<span>获得佣金：{{scope.row.commission}}</span>
+					<span>上级分佣：{{scope.row.inviter_commission}}</span>
 				</template>
 			</el-table-column>
 			<el-table-column prop="status_desc" label="订单状态" align="center">

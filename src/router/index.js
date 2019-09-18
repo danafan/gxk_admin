@@ -12,6 +12,7 @@ const userDetail = resolve=>require(['@/container/User/userDetail'],resolve)
 const identity = resolve=>require(['@/container/User/identity'],resolve)
 const wangwang = resolve=>require(['@/container/User/wangwang'],resolve)
 const bankCard = resolve=>require(['@/container/User/bankCard'],resolve)
+const alipay = resolve=>require(['@/container/User/alipay'],resolve)
 const taskList = resolve=>require(['@/container/Task/taskList'],resolve)
 const taskTemplate = resolve=>require(['@/container/Task/taskTemplate'],resolve)
 const templateDetail = resolve=>require(['@/container/Task/templateDetail'],resolve)
@@ -20,6 +21,7 @@ const merchantList = resolve=>require(['@/container/Merchants/merchantList'],res
 const merchantDetail = resolve=>require(['@/container/Merchants/merchantDetail'],resolve)
 const moneyRecord = resolve=>require(['@/container/Merchants/moneyRecord'],resolve)
 const merchantTopup = resolve=>require(['@/container/Merchants/merchantTopup'],resolve)
+const merchantInfo = resolve=>require(['@/container/Merchants/merchantsInfo'],resolve)
 const storeList = resolve=>require(['@/container/Merchants/storeList'],resolve)
 const orderList = resolve=>require(['@/container/Order/orderList'],resolve)
 const commentOrder = resolve=>require(['@/container/Order/commentOrder'],resolve)
@@ -54,6 +56,7 @@ const router = new Router({
     { path: '/identity',name:"身份审核", component: identity},
     { path: '/wangwang',name:"旺旺号审核", component: wangwang},
     { path: '/bankCard',name:"银行卡审核", component: bankCard},
+    { path: '/alipay',name:"支付宝审核", component: alipay},
     { path: '/taskList',name:"任务列表", component: taskList},
     { path: '/taskTemplate',name:"任务模版", component: taskTemplate,meta:{keepAlive:true}},
     { path: '/templateDetail',name:"模版信息", component: templateDetail},
@@ -62,6 +65,7 @@ const router = new Router({
     { path: '/merchantDetail',name:"商家详情", component: merchantDetail},
     { path: '/moneyRecord',name:"商家资金记录", component: moneyRecord},
     { path: '/merchantTopup',name:"商家充值", component: merchantTopup},
+    { path: '/merchantInfo',name:"商家数据", component: merchantInfo},
     { path: '/storeList',name:"店铺列表", component: storeList},
     { path: '/orderList',name:"订单列表", component: orderList},
     { path: '/commentOrder',name:"评论列表", component: commentOrder},
