@@ -55,7 +55,13 @@
 				<el-input v-model="adminObj.password" style='width: 200px;' placeholder="请输入密码"></el-input>
 			</el-form-item>
 			<el-form-item label="手机号：">
-				<el-input v-model="adminObj.phone" style='width: 200px;' placeholder="请输入手机号"></el-input>
+				<el-input v-model="adminObj.phone" type="number" style='width: 200px;' placeholder="请输入手机号"></el-input>
+			</el-form-item>
+			<el-form-item label="QQ号：" required>
+				<el-input v-model="adminObj.qq"  type="number" style='width: 200px;' placeholder="请输入手机号"></el-input>
+			</el-form-item>
+			<el-form-item label="微信号：" required>
+				<el-input v-model="adminObj.wx" style='width: 200px;' placeholder="请输入手机号"></el-input>
 			</el-form-item>
 			<el-form-item label="所属角色：" required>
 				<el-select v-model="adminObj.role_id" placeholder="请选择">
@@ -132,6 +138,8 @@
 					admin_name:"",
 					password:"",
 					phone:"",
+					qq:"",
+					wx:"",
 					role_id:"",
 					admin_group:"",
 					system_admin:0,
@@ -221,6 +229,8 @@
 					admin_name:"",
 					password:"",
 					phone:"",
+					qq:"",
+					wx:"",
 					role_id:"",
 					admin_group:"",
 					system_admin:0,
@@ -238,6 +248,8 @@
 						this.adminObj.admin_name = res.data.data.admin_name;
 						this.adminObj.password = "";
 						this.adminObj.phone = res.data.data.phone;
+						this.adminObj.qq = res.data.data.qq;
+						this.adminObj.wx = res.data.data.wx;
 						this.adminObj.role_id = res.data.data.role_id;
 						
 						this.admin_group = [];
@@ -271,6 +283,10 @@
 					this.$message.warning('请填写用户名');
 				}else if(this.adminObj.password == "" && this.dislogType == 1){
 					this.$message.warning('请填写密码');
+				}else if(this.adminObj.qq == ""){
+					this.$message.warning('请填写QQ号');
+				}else if(this.adminObj.wx == ""){
+					this.$message.warning('请填写微信号');
 				}else if(this.adminObj.role_id == ""){
 					this.$message.warning('请选择所属角色');
 				}else{

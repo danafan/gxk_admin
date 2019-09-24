@@ -43,131 +43,131 @@
 					<div class="tabLabel">支付宝账号</div>
 					<div class="tabContent">{{part1.zhifubao}}</div>
 					<!-- <div class="tabLabel">微信号</div>
-					<div class="tabContent">{{part1.wx}}</div> -->
+						<div class="tabContent">{{part1.wx}}</div> -->
+					</div>
 				</div>
 			</div>
+			<el-table :data="part2" size="small" border style="width: 100%;margin-top: 50px" align="center" :header-cell-style="{'background':'#f4f4f4'}">
+				<el-table-column prop="real_name" label="真实姓名" align="center">
+				</el-table-column>
+				<el-table-column prop="id_card_no" label="身份证号码" align="center">
+				</el-table-column>
+				<el-table-column prop="id_card_address" label="身份证地址" width="300" align="center">
+				</el-table-column>
+				<el-table-column label="身份证图片" align="center">
+					<template slot-scope="scope">
+						<el-button type="text" size="small" @click="look(scope.row,1)">正面</el-button>
+						<el-button type="text" size="small" @click="look(scope.row,2)">反面</el-button>
+					</template>
+				</el-table-column>
+				<el-table-column label="操作" align="center">
+					<template slot-scope="scope">
+						<el-button type="text" v-if="scope.row.status == 1" size="small" @click="check(scope.row.id,'2')">通过</el-button>
+						<el-button type="text" v-if="scope.row.status == 1" size="small" @click="check(scope.row.id,'3')">拒绝</el-button>
+					</template>
+				</el-table-column>
+			</el-table>
+			<el-table :data="part3" size="small" border style="width: 100%;margin-top: 50px" align="center" :header-cell-style="{'background':'#f4f4f4'}">
+				<el-table-column prop="total_commission" label="累计获取佣金（元）" align="center">
+				</el-table-column>
+				<el-table-column prop="total_income" label="可提现佣金（元）" align="center">
+				</el-table-column>
+				<el-table-column prop="frozen_money" label="冻结金额（元）" align="center">
+				</el-table-column>
+				<el-table-column prop="doneNum" label="完成订单数量" align="center">
+				</el-table-column>
+				<el-table-column prop="extension_num" label="邀请码总数" align="center">
+				</el-table-column>
+				<el-table-column prop="invitation_code_num" label="已使用邀请码" align="center">
+				</el-table-column>
+				<el-table-column prop="login_times" label="登录次数" align="center">
+				</el-table-column>
+			</el-table>
+			<el-table :data="part4" size="small" border style="width: 100%;margin-top: 50px" align="center" :header-cell-style="{'background':'#f4f4f4'}">
+				<el-table-column prop="wangwang" label="旺旺号" align="center">
+				</el-table-column>
+				<el-table-column prop="user_id" label="手机号码" align="center">
+				</el-table-column>
+				<el-table-column prop="order_sn" label="淘宝订单号" align="center">
+				</el-table-column>
+				<el-table-column prop="address" label="详细地址" align="center">
+				</el-table-column>
+				<el-table-column prop="check_admin_name" label="审核人" align="center">
+				</el-table-column>
+				<el-table-column prop="done_order_num" label="完成订单数量" align="center">
+				</el-table-column>
+				<el-table-column prop="job" label="操作" align="center">
+					<template slot-scope="scope">
+						<el-button type="text" v-if="scope.row.status == 0" size="small" @click="checkWang(scope.row.id,'1')">通过</el-button>
+						<el-button type="text" v-if="scope.row.status == 0" size="small" @click="checkWang(scope.row.id,'2')">拒绝</el-button>
+						<el-button type="text" v-if="scope.row.status == 1" size="small" @click="updateNum(scope.row.wangwang,scope.row.id)">修改接单数</el-button>
+					</template>
+				</el-table-column>
+			</el-table>
+			<!-- 查看身份证图片 -->
+			<el-dialog title="身份证图片" center :visible.sync="showImg" width="60%">
+				<img class="cardimg" :src="cardImg" @click="rotate" ref="img">
+			</el-dialog>
+			<!-- 修改接单数 -->
+			<el-dialog title="修改接单数" width="30%" center :visible.sync="showDialog">
+				<el-form size="small">
+					<el-form-item label="今日可接单：">
+						<el-input v-model="numObj.day_order_limit" style="width: 150px">
+							<template slot="append">单</template>
+						</el-input>
+					</el-form-item>
+					<el-form-item label="本周可接单：">
+						<el-input v-model="numObj.week_order_limit" style="width: 150px">
+							<template slot="append">单</template>
+						</el-input>
+					</el-form-item>
+					<el-form-item label="本月可接单：">
+						<el-input v-model="numObj.month_order_limit" style="width: 150px">
+							<template slot="append">单</template>
+						</el-input>
+					</el-form-item>
+				</el-form>
+				<span slot="footer" class="dialog-footer">
+					<el-button size="small" type="primary" @click="save">保存</el-button>
+				</span>
+			</el-dialog>
 		</div>
-		<el-table :data="part2" size="small" border style="width: 100%;margin-top: 50px" align="center" :header-cell-style="{'background':'#f4f4f4'}">
-			<el-table-column prop="real_name" label="真实姓名" align="center">
-			</el-table-column>
-			<el-table-column prop="id_card_no" label="身份证号码" align="center">
-			</el-table-column>
-			<el-table-column prop="id_card_address" label="身份证地址" width="300" align="center">
-			</el-table-column>
-			<el-table-column label="身份证图片" align="center">
-				<template slot-scope="scope">
-					<el-button type="text" size="small" @click="look(scope.row,1)">正面</el-button>
-					<el-button type="text" size="small" @click="look(scope.row,2)">反面</el-button>
-				</template>
-			</el-table-column>
-			<el-table-column label="操作" align="center">
-				<template slot-scope="scope">
-					<el-button type="text" v-if="scope.row.status == 1" size="small" @click="check(scope.row.id,'2')">通过</el-button>
-					<el-button type="text" v-if="scope.row.status == 1" size="small" @click="check(scope.row.id,'3')">拒绝</el-button>
-				</template>
-			</el-table-column>
-		</el-table>
-		<el-table :data="part3" size="small" border style="width: 100%;margin-top: 50px" align="center" :header-cell-style="{'background':'#f4f4f4'}">
-			<el-table-column prop="total_commission" label="累计获取佣金（元）" align="center">
-			</el-table-column>
-			<el-table-column prop="total_income" label="可提现佣金（元）" align="center">
-			</el-table-column>
-			<el-table-column prop="frozen_money" label="冻结金额（元）" align="center">
-			</el-table-column>
-			<el-table-column prop="doneNum" label="完成订单数量" align="center">
-			</el-table-column>
-			<el-table-column prop="extension_num" label="邀请码总数" align="center">
-			</el-table-column>
-			<el-table-column prop="invitation_code_num" label="已使用邀请码" align="center">
-			</el-table-column>
-			<el-table-column prop="login_times" label="登录次数" align="center">
-			</el-table-column>
-		</el-table>
-		<el-table :data="part4" size="small" border style="width: 100%;margin-top: 50px" align="center" :header-cell-style="{'background':'#f4f4f4'}">
-			<el-table-column prop="wangwang" label="旺旺号" align="center">
-			</el-table-column>
-			<el-table-column prop="user_id" label="手机号码" align="center">
-			</el-table-column>
-			<el-table-column prop="order_sn" label="淘宝订单号" align="center">
-			</el-table-column>
-			<el-table-column prop="address" label="详细地址" align="center">
-			</el-table-column>
-			<el-table-column prop="check_admin_name" label="审核人" align="center">
-			</el-table-column>
-			<el-table-column prop="done_order_num" label="完成订单数量" align="center">
-			</el-table-column>
-			<el-table-column prop="job" label="操作" align="center">
-				<template slot-scope="scope">
-					<el-button type="text" v-if="scope.row.status == 0" size="small" @click="checkWang(scope.row.id,'1')">通过</el-button>
-					<el-button type="text" v-if="scope.row.status == 0" size="small" @click="checkWang(scope.row.id,'2')">拒绝</el-button>
-					<el-button type="text" v-if="scope.row.status == 1" size="small" @click="updateNum(scope.row.wangwang,scope.row.id)">修改接单数</el-button>
-				</template>
-			</el-table-column>
-		</el-table>
-		<!-- 查看身份证图片 -->
-		<el-dialog title="身份证图片" center :visible.sync="showImg" width="60%">
-			<img class="cardimg" :src="cardImg" @click="rotate" ref="img">
-		</el-dialog>
-		<!-- 修改接单数 -->
-		<el-dialog title="修改接单数" width="30%" center :visible.sync="showDialog">
-			<el-form size="small">
-				<el-form-item label="今日可接单：">
-					<el-input v-model="numObj.day_order_limit" style="width: 150px">
-						<template slot="append">单</template>
-					</el-input>
-				</el-form-item>
-				<el-form-item label="本周可接单：">
-					<el-input v-model="numObj.week_order_limit" style="width: 150px">
-						<template slot="append">单</template>
-					</el-input>
-				</el-form-item>
-				<el-form-item label="本月可接单：">
-					<el-input v-model="numObj.month_order_limit" style="width: 150px">
-						<template slot="append">单</template>
-					</el-input>
-				</el-form-item>
-			</el-form>
-			<span slot="footer" class="dialog-footer">
-				<el-button size="small" type="primary" @click="save">保存</el-button>
-			</span>
-		</el-dialog>
-	</div>
-</template>
-<style lang="less" scoped>
-.infoTop{
-	display: flex;
-	.userImg{
-		margin-right: 20px;
-		width: 180px;
-		height: 180px;
-	}
-	.userInfoTab{
-		.row{
-			display:flex;
-			.tabLabel{
-				border: 1px solid #ccc;
-				background: #f4f4f4;
-				width: 200px;
-				text-align: center;
-				height: 36px;
-				line-height: 36px;
-				font-weight: 700;
-				font-size: 14px;
-			}
-			.tabContent{
-				border: 1px solid #ccc;
-				width: 300px;
-				text-align: center;
-				height: 36px;
-				line-height: 36px;
-				font-size: 14px;
+	</template>
+	<style lang="less" scoped>
+	.infoTop{
+		display: flex;
+		.userImg{
+			margin-right: 20px;
+			width: 180px;
+			height: 180px;
+		}
+		.userInfoTab{
+			.row{
+				display:flex;
+				.tabLabel{
+					border: 1px solid #ccc;
+					background: #f4f4f4;
+					width: 200px;
+					text-align: center;
+					height: 36px;
+					line-height: 36px;
+					font-weight: 700;
+					font-size: 14px;
+				}
+				.tabContent{
+					border: 1px solid #ccc;
+					width: 300px;
+					text-align: center;
+					height: 36px;
+					line-height: 36px;
+					font-size: 14px;
+				}
 			}
 		}
 	}
-}
-.cardimg{
-	width: 100%;
-}
+	.cardimg{
+		width: 100%;
+	}
 
 </style>
 <script>
@@ -242,49 +242,101 @@
 			},
 			//审核
 			check(id,status){
-				this.$confirm(`确认${status == '2'?'通过':'拒绝'}?`, '提示', {
-					confirmButtonText: '确定',
-					cancelButtonText: '取消',
-					type: 'warning'
-				}).then(() => {
-					resource.cardCheck({id:id,status:status}).then(res => {
-						if(res.data.code == 1){
-							this.$message.success(res.data.msg);
-							//获取信息
-							this.getUserDetail();
+				if(status == '2'){
+					this.$confirm('确认通过?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						resource.cardCheck({id:id,status:status}).then(res => {
+							if(res.data.code == 1){
+								this.$message.success(res.data.msg);
+								//获取信息
+								this.getUserDetail();
+							}else{
+								this.$message.warning(res.data.msg);
+							}
+						})
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '取消'
+						});          
+					});
+				}else{
+					this.$prompt('拒绝原因', '确认拒绝？', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消'
+					}).then(({ value }) => {
+						if(value){
+							resource.cardCheck({id:id,status:status,reject_reason:value}).then(res => {
+								if(res.data.code == 1){
+									this.$message.success(res.data.msg);
+									//获取信息
+									this.getUserDetail();
+								}else{
+									this.$message.warning(res.data.msg);
+								}
+							})
 						}else{
-							this.$message.warning(res.data.msg);
+							this.$message.warning("请输入拒绝原因");
 						}
-					})
-				}).catch(() => {
-					this.$message({
-						type: 'info',
-						message: '取消'
-					});          
-				});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '取消'
+						});       
+					});
+				}
 			},
 			//审核旺旺号
 			checkWang(id,status){
-				this.$confirm(`确认${status == '1'?'通过':'拒绝'}?`, '提示', {
-					confirmButtonText: '确定',
-					cancelButtonText: '取消',
-					type: 'warning'
-				}).then(() => {
-					resource.wangCheck({id:id,status:status}).then(res => {
-						if(res.data.code == 1){
-							this.$message.success(res.data.msg);
-							//获取信息
-							this.getUserDetail();
+				if(status == '1'){
+					this.$confirm('确认通过?', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						resource.wangCheck({id:id,status:status}).then(res => {
+							if(res.data.code == 1){
+								this.$message.success(res.data.msg);
+								//获取信息
+								this.getUserDetail();
+							}else{
+								this.$message.warning(res.data.msg);
+							}
+						})
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '取消'
+						});          
+					});
+				}else{
+					this.$prompt('拒绝原因', '确认拒绝？', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消'
+					}).then(({ value }) => {
+						if(value){
+							resource.wangCheck({id:id,status:status,reject_reason:value}).then(res => {
+								if(res.data.code == 1){
+									this.$message.success(res.data.msg);
+									//获取信息
+									this.getUserDetail();
+								}else{
+									this.$message.warning(res.data.msg);
+								}
+							})
 						}else{
-							this.$message.warning(res.data.msg);
+							this.$message.warning("请输入拒绝原因");
 						}
-					})
-				}).catch(() => {
-					this.$message({
-						type: 'info',
-						message: '取消'
-					});          
-				});
+					}).catch(() => {
+						this.$message({
+							type: 'info',
+							message: '取消'
+						});       
+					});
+				}
 			},
 			//点击修改接单数
 			updateNum(wang,id){
