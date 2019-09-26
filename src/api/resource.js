@@ -112,6 +112,28 @@ let path = {
 	alipayCheck:'user/alipayacount',						//支付宝审核
 	getStoreNum:'store/storedata',							//获取商家数据
 	checkAlipay:'user/alipaycounthandle',					//审核支付宝
+	inviteList:'invitationcode/list',						//邀请码列表
+	createInvite:'invitationcode/create',					//生成邀请码
+	storeGroup:'storegroup/storegroupselect',				//所有分组下拉框
+	getGroupList:'storegroup/storegrouplist',				//分组列表
+	createGroup:'storegroup/storegroupcreate',				//创建分组
+	getGroupDetail:'storegroup/storegroupedit',				//获取分组详情
+	groupCommit:'storegroup/storegroupeditcommit',			//提交修改分组
+	storeHandle:'storegroup/storeHandle',					//操作
+	agentTotalList:'agent/agentadminlist',					//总代理列表
+	editorTotalStatus:'agent/setstatusofagentadmin',		//开启或关闭总代理状态
+	createTotalAgent:'agent/addagentadmin',					//创建总代理
+	getTotalAgentInfo:'agent/getagentadmininfo',			//获取总代理信息
+	editorTotalAgent:'agent/editagentadmin',				//修改总代理
+	agentList:'agent/agentlist',							//代理列表
+	editorStatus:'agent/setstatusofagent',					//关闭或开启子代理状态
+	getAgentInfo:'agent/getagentinfo',						//获取子代理信息
+	agentBindCard:'agent/bindbankcard',						//子代理绑定银行卡
+	agentAmountRecord:'finance/agentamountrecord',			//代理资金记录
+	agentWithdrawRecord:'finance/agentwithdrawrecord',		//代理提现记录
+	getaGentwithdRawdetail:'finance/getagentwithdrawdetail',//代理提现详情
+	agentwithdrawcheck:'finance/agentwithdrawcheck',		//代理提现审核
+	userRemark:'user/userremark',							//用户备注
 
 }				
 export default{
@@ -594,6 +616,94 @@ export default{
 	//审核支付宝
 	checkAlipay(params){
 		return http.get(path.checkAlipay, params)
+	},
+	//邀请码列表
+	inviteList(params){
+		return http.get(path.inviteList, params)
+	},
+	//生成邀请码
+	createInvite(params){
+		return http.post(path.createInvite, params)
+	},
+	//所有分组下拉框
+	storeGroup(params){
+		return http.get(path.storeGroup, params)
+	},
+	//分组列表
+	getGroupList(params){
+		return http.get(path.getGroupList, params)
+	},
+	//创建分组
+	createGroup(params){
+		return http.get(path.createGroup, params)
+	},
+	//获取分组详情
+	getGroupDetail(params){
+		return http.get(path.getGroupDetail, params)
+	},
+	//提交修改分组
+	groupCommit(params){
+		return http.get(path.groupCommit, params)
+	},
+	//操作分组
+	storeHandle(params){
+		return http.get(path.storeHandle, params)
+	},
+	//总代理列表
+	agentTotalList(params){
+		return http.get(path.agentTotalList, params)
+	},
+	//开启或关闭总代理状态
+	editorTotalStatus(params){
+		return http.post(path.editorTotalStatus, params)
+	},
+	//创建总代理
+	createTotalAgent(params){
+		return http.post(path.createTotalAgent, params)
+	},
+	//获取总代理信息
+	getTotalAgentInfo(params){
+		return http.get(path.getTotalAgentInfo, params)
+	},
+	//修改总代理
+	editorTotalAgent(params){
+		return http.post(path.editorTotalAgent, params)
+	},
+	//代理列表
+	agentList(params){
+		return http.get(path.agentList, params)
+	},
+	//关闭或开启子代理状态
+	editorStatus(params){
+		return http.post(path.editorStatus, params)
+	},
+	//获取子代理信息
+	getAgentInfo(params){
+		return http.get(path.getAgentInfo, params)
+	},
+	//子代理绑定银行卡
+	agentBindCard(params){
+		return http.post(path.agentBindCard, params)
+	},
+	//代理资金记录
+	agentAmountRecord(params){
+		return http.get(path.agentAmountRecord, params)
+	},
+	//代理提现记录
+	agentWithdrawRecord(params){
+		return http.get(path.agentWithdrawRecord, params)
+	},
+	//代理提现详情
+	getaGentwithdRawdetail(params){
+		return http.get(path.getaGentwithdRawdetail, params)
+	},
+	//代理提现审核
+	agentwithdrawcheck(params){
+		return http.post(path.agentwithdrawcheck, params)
+	},
+	//用户备注
+	userRemark(params){
+		return http.get(path.userRemark, params)
 	},
 }
 

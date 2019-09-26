@@ -43,7 +43,11 @@
 				<el-button type="primary" @click="search">搜索</el-button>
 			</el-form-item>
 		</el-form>
-		<el-table :data="dataObj.data" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}" :default-sort = "{prop: 'completeTime'}">
+		<div class="taskNum">
+			<span>任务总数：{{dataObj.data.calculate.total_num}}</span>
+			<span>总剩余数：{{dataObj.data.calculate.wait_num}}</span>
+		</div>
+		<el-table :data="dataObj.data.list" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}" :default-sort = "{prop: 'completeTime'}">
 			<el-table-column prop="commit_time" label="商家/店铺" align="center">
 				<template slot-scope="scope">
 					<p>{{scope.row.store_name}}/{{scope.row.shop_name}}</p>
@@ -101,7 +105,14 @@
 </div>
 </template>
 <style lang="less" scoped>
-
+.taskNum{
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #333;
+	span{
+		margin-right: 10px;
+	}
+}
 </style>
 <script>
 	import resource from '../../api/resource.js'

@@ -30,6 +30,7 @@
 				<el-table-column label="操作" align="center">
 					<template slot-scope="scope">
 						<el-button type="text" size="small" @click="edior(scope.row.admin_id)">编辑</el-button>
+						<el-button type="text" size="small" @click="$router.push('/invite?id=' + scope.row.admin_id)">邀请码</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -58,7 +59,7 @@
 				<el-input v-model="adminObj.phone" type="number" style='width: 200px;' placeholder="请输入手机号"></el-input>
 			</el-form-item>
 			<el-form-item label="QQ号：" required>
-				<el-input v-model="adminObj.qq"  type="number" style='width: 200px;' placeholder="请输入手机号"></el-input>
+				<el-input v-model="adminObj.qq"  type="text" style='width: 200px;' placeholder="请输入手机号"></el-input>
 			</el-form-item>
 			<el-form-item label="微信号：" required>
 				<el-input v-model="adminObj.wx" style='width: 200px;' placeholder="请输入手机号"></el-input>

@@ -31,7 +31,7 @@
 				</el-table-column>
 				<el-table-column label="操作" align="center" >
 					<template slot-scope="scope">
-						<el-button type="text" size="small" @click="updateStore(scope.row.template_id)">修改可见商家</el-button>
+						<el-button type="text" size="small" @click="updateStore(scope.row.template_id)">修改可见分组</el-button>
 						<el-button type="text" size="small" @click="look(scope.row.template_id)">查看</el-button>
 						<el-button type="text" v-if="scope.row.using == 0" size="small" @click="setting(scope.row.template_id,scope.row.using)">停用</el-button>
 						<el-button type="text" v-if="scope.row.using == 1" size="small" @click="setting(scope.row.template_id,scope.row.using)">启用</el-button>
@@ -51,10 +51,10 @@
 			</el-pagination>
 		</div>
 	</el-card>
-	<el-dialog title="修改可见商家" center width="50%" :visible.sync="updateShop">
+	<el-dialog title="修改可见分组" center width="50%" :visible.sync="updateShop">
 		<el-checkbox v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
 		<el-checkbox-group v-model="checkList" @change="handleCheckedCitiesChange">
-			<el-checkbox :label="item.store_id" v-for="item in storeList">{{item.store_name}}</el-checkbox>
+			<el-checkbox :label="item.id" v-for="item in storeList">{{item.store_group_name}}</el-checkbox>
 		</el-checkbox-group>
 		<span slot="footer" class="dialog-footer">
 			<el-button size="small" @click="updateShop = false">取消</el-button>

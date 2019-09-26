@@ -18,7 +18,7 @@
 				<div class="temContent">{{req.auto_cancel}}</div>
 			</div>
 			<div class="temRow">
-				<div class="temLabel">任务可见商家</div>
+				<div class="temLabel">任务可见分组</div>
 				<div class="temContent">{{req.store_ids}}</div>
 			</div>
 			<div class="temRow">

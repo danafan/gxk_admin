@@ -104,6 +104,12 @@
 					</template>
 				</el-table-column>
 			</el-table>
+			<div class="remark">
+				<el-input type="textarea" :rows="3" style="width: 500px;margin-right: 20px;" placeholder="请输入用户备注" v-model="userRemark">
+				</el-input>
+				<el-button type="primary" size="small" @click="saveRemark">保存</el-button>
+			</div>
+			
 			<!-- 查看身份证图片 -->
 			<el-dialog title="身份证图片" center :visible.sync="showImg" width="60%">
 				<img class="cardimg" :src="cardImg" @click="rotate" ref="img">
@@ -168,7 +174,11 @@
 	.cardimg{
 		width: 100%;
 	}
-
+	.remark{
+		margin-top: 30px;
+		display:flex;
+		align-items: center;
+	}
 </style>
 <script>
 	import resource from '../../../api/resource.js'
@@ -191,6 +201,7 @@
 				id:"",
 				cardImg:"",				//身份证图片
 				current:0,
+				userRemark:"",			//用户备注
 			}
 		},
 		props:{
@@ -220,6 +231,7 @@
 						}
 						this.part3.push(res.data.data.part_3);
 						this.part4 = res.data.data.part_4;
+						this.userRemark = res.data.data.part_5;
 					}else{
 						this.$message.warning(res.data.msg);
 					}
@@ -365,6 +377,21 @@
 					}
 				})
 			},
+			//保存用户备注
+			saveRemark(){
+				if(this.userRemark == ''){
+					this.$message.warning("请输入用户备注");
+					return;
+				}
+				resource.userRemark({phone:this.phone,remark:this.userRemark}).then(res => {
+					if(res.data.code == 1){
+						this.$message.success(res.data.msg);
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
+			}
+
 
 		}
 	}

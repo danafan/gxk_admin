@@ -47,9 +47,26 @@
 						</el-select>
 						内未完成任务自动取消
 					</el-form-item>
-					<el-form-item label="任务可见商家：">
+
+					<el-form-item label="总代理抽成：">
+						<el-input style="width: 200px;" type="number" v-model="req.general_agency_money">
+							<template slot="append">元</template>
+						</el-input>
+					</el-form-item>
+					<el-form-item label="代理抽成：">
+						<el-input style="width: 200px;" type="number" v-model="req.agency_money">
+							<template slot="append">元</template>
+						</el-input>
+					</el-form-item>
+					<el-form-item label="模版可接用户：">
+						<el-radio-group v-model="req.template_users">
+							<el-radio label="1">全部用户可接</el-radio>
+							<el-radio label="0">全部用户不可接</el-radio>
+						</el-radio-group>
+					</el-form-item>
+					<el-form-item label="任务可见分组：">
 						<el-select v-model="shop_template_ids" multiple placeholder="请选择">
-							<el-option v-for="item in storeList" :key="item.store_id" :label="item.store_name" :value="item.store_id">
+							<el-option v-for="item in storeList" :key="item.id" :label="item.store_group_name" :value="item.id">
 							</el-option>
 						</el-select>
 					</el-form-item>
@@ -218,7 +235,6 @@
 			}
 		}
 	}
-
 }
 .temlist{
 	border-top: 1px solid #ccc;
@@ -300,7 +316,10 @@
 					step_ids:"",
 					charge:[],
 					user_task_time:"",
+					general_agency_money:"",
+					agency_money:"",
 					shop_template_ids:"",
+					template_users:'1',
 					desc:"",
 					step:{},
 					tuiguang_commission:""
@@ -314,7 +333,7 @@
 				time1:"",
 				timeType:1,							//间隔时间类型（默认秒）
 				timeType1:1,
-				shop_template_ids:[],				//选中所有商家列表（*）
+				shop_template_ids:[],				//选中所有分组列表（*）
 				processedStep:[],					//待处理的步骤列表
 				detailStoreList:[],					//第二步显示选中商家
 				detailServiceList:[],				//第二步显示选中商家
@@ -328,9 +347,9 @@
 		},
 		inject:['reload'],
 		methods:{
-			//获取商家列表
+			//获取分组列表
 			getStoreList(){
-				resource.taskStoreList().then(res => {
+				resource.storeGroup().then(res => {
 					if(res.data.code == 1){
 						this.storeList = res.data.data;
 					}else{
@@ -469,7 +488,17 @@
 				}else{
 					this.req.auto_cancel = parseInt(this.time1)*this.timeType1;
 				}
-				// 处理商家id集合
+				// 处理总代理抽成
+				if(this.req.general_agency_money == ""){
+					this.$message.warning("请输入总代理抽成");
+					return;
+				}
+				// 处理代理抽成
+				if(this.req.agency_money == ""){
+					this.$message.warning("请输入代理抽成");
+					return;
+				}
+				// 处理分组id集合
 				this.req.shop_template_ids = this.shop_template_ids.join(',');
 				//处理选择的任务步骤
 				if(this.processedStep.length == 0){
@@ -499,7 +528,6 @@
 					step_ids.push(sid);
 					this.req.step[i+1] = arr;
 				}
-				console.log(this.processedStep);
 				this.req.step_ids = step_ids.join(',');
 				//处理第二页的可见商家
 				this.detailStoreList = [];
