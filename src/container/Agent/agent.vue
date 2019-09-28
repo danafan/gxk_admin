@@ -6,7 +6,7 @@
 					<el-input style="width: 300px;" v-model="req.account" placeholder="输入代理账号"></el-input>
 				</el-form-item>
 				<el-form-item label="代理名称：">
-					<el-input style="width: 300px;" v-model="req.name" placeholder="输入总代理名称"></el-input>
+					<el-input style="width: 300px;" v-model="req.name" placeholder="输入代理名称"></el-input>
 				</el-form-item>
 				<el-form-item label="状态：">
 					<el-select v-model="req.status" placeholder="请选择" clearable>
@@ -177,7 +177,7 @@
 						arr[a] = this.req[a];
 					}
 				}
-				arr.index = 5;
+				arr.index = 10;
 				exportUp.exportUp(arr)
 			},
 			//点击编辑

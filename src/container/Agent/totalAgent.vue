@@ -225,7 +225,7 @@
 						arr[a] = this.req[a];
 					}
 				}
-				arr.index = 5;
+				arr.index = 9;
 				exportUp.exportUp(arr)
 			},
 			//点击编辑

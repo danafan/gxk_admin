@@ -102,6 +102,19 @@
 		<div class="itemLabel">汇款人：</div>
 		<div class="itemContent">{{detailObj.open_account_name}}</div>
 	</div>
+	
+	<div class="dialogItem">
+		<div class="itemLabel">收款银行：</div>
+		<div class="itemContent">{{detailObj.gather_bank_name}}</div>
+	</div>
+	<div class="dialogItem">
+		<div class="itemLabel">收款卡号：</div>
+		<div class="itemContent">{{detailObj.gather_bank_card_num}}</div>
+	</div>
+	<div class="dialogItem">
+		<div class="itemLabel">收款人：</div>
+		<div class="itemContent">{{detailObj.gather_open_account_name}}</div>
+	</div>
 	<div class="dialogItem">
 		<div class="itemLabel">充值金额：</div>
 		<div class="itemContent">{{detailObj.money}}</div>

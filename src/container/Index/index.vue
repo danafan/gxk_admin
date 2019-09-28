@@ -52,8 +52,8 @@
 						<div class="rowItem" @click="$router.push('/bankCard')">银行卡待审（<span>{{indexData.bankCardWaitCheck}}</span>）</div>
 					</div>
 					<div class="processRow">
-						<div class="rowItem" @click="$router.push('/withdrawal')">总代理提现待审（<span>{{indexData.AgentAdminWithdrawWaitCheck}}</span>）</div>
-						<div class="rowItem" @click="$router.push('/wangwang')">代理提现待审<span>{{indexData.AgentWithdrawWaitCheck}}</span>）</div>
+						<div class="rowItem" @click="$router.push('/totalAgentCashRecord')">总代理提现待审（<span>{{indexData.AgentAdminWithdrawWaitCheck}}</span>）</div>
+						<div class="rowItem" @click="$router.push('/agentCashRecord')">代理提现待审（<span>{{indexData.AgentWithdrawWaitCheck}}</span>）</div>
 					</div>
 				</div>
 			</div>

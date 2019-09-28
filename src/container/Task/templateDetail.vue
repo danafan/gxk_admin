@@ -22,6 +22,18 @@
 				<div class="temContent">{{req.store_ids}}</div>
 			</div>
 			<div class="temRow">
+				<div class="temLabel">总代理抽成（元）</div>
+				<div class="temContent">{{req.general_agency_money}}</div>
+			</div>
+			<div class="temRow">
+				<div class="temLabel">代理抽成（元）</div>
+				<div class="temContent">{{req.agency_money}}</div>
+			</div>
+			<div class="temRow">
+				<div class="temLabel">模版可接用户</div>
+				<div class="temContent">{{req.template_users}}</div>
+			</div>
+			<div class="temRow">
 				<div class="temLabel">备注</div>
 				<div class="temContent">{{req.desc}}</div>
 			</div>

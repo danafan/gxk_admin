@@ -137,12 +137,24 @@
 						<div class="temContent" v-if="timeType1 == 3600">{{req.auto_cancel/3600}}小时</div>
 					</div>
 					<div class="temRow">
-						<div class="temLabel">任务可见商家</div>
+						<div class="temLabel">任务可见分组</div>
 						<div class="temContent">{{detailStoreList.join(',')}}</div>
 					</div>
 					<div class="temRow">
 						<div class="temLabel">备注</div>
 						<div class="temContent">{{req.desc}}</div>
+					</div>
+					<div class="temRow">
+						<div class="temLabel">代理抽成（元）</div>
+						<div class="temContent">{{req.agency_money}}</div>
+					</div>
+					<div class="temRow">
+						<div class="temLabel">总代理抽成（元）</div>
+						<div class="temContent">{{req.general_agency_money}}</div>
+					</div>
+					<div class="temRow">
+						<div class="temLabel">模版可接用户</div>
+						<div class="temContent">{{req.template_users == '1'?'全部用户可接':'全部用户不可接'}}</div>
 					</div>
 					<div class="temRow">
 						<div class="temLabel">服务费（元）</div>
@@ -529,12 +541,12 @@
 					this.req.step[i+1] = arr;
 				}
 				this.req.step_ids = step_ids.join(',');
-				//处理第二页的可见商家
+				//处理第二页的可见分组
 				this.detailStoreList = [];
 				for(var s = 0;s < this.shop_template_ids.length;s ++){
 					for(var m = 0;m < this.storeList.length;m ++){
-						if(this.shop_template_ids[s] == this.storeList[m].store_id){
-							this.detailStoreList.push(this.storeList[m].store_name);
+						if(this.shop_template_ids[s] == this.storeList[m].id){
+							this.detailStoreList.push(this.storeList[m].store_group_name);
 						}
 					}
 				}
@@ -560,6 +572,9 @@
 						user_task_time:this.req.user_task_time,
 						auto_cancel:this.req.auto_cancel,
 						shop_template_ids:this.req.shop_template_ids,
+						general_agency_money:this.req.general_agency_money,
+						agency_money:this.req.agency_money,
+						template_users:this.req.template_users,
 						charge:this.req.charge,
 						desc:this.req.desc,
 						tuiguang_commission:this.req.tuiguang_commission

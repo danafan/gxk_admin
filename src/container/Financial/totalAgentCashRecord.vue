@@ -266,7 +266,7 @@
 						arr[a] = this.req[a];
 					}
 				}
-				arr.index = 1;
+				arr.index = 12;
 				exportup.exportUp(arr)
 			}
 			

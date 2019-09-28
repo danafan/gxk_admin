@@ -28,7 +28,7 @@
 				</el-table-column>
 				<el-table-column label="操作" align="center">
 					<template slot-scope="scope">
-						<el-button type="text" size="small" v-clipboard="scope.row.invitation_code" @success="$message.success('复制成功')">复制</el-button>
+						<el-button type="text" size="small" v-clipboard="scope.row.invitation_code" @success="$message.success('复制成功')" v-if="scope.row.status == 0">复制</el-button>
 					</template>
 				</el-table-column>
 			</el-table>
@@ -166,7 +166,7 @@
 						arr[a] = this.req[a];
 					}
 				}
-				arr.index = 5;
+				arr.index = 8;
 				exportUp.exportUp(arr)
 			}
 			
