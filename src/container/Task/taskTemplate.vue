@@ -31,6 +31,7 @@
 				</el-table-column>
 				<el-table-column label="操作" align="center" >
 					<template slot-scope="scope">
+						<el-button type="text" size="small" @click="updateTem(scope.row.template_shop_name,scope.row.template_id)">编辑模版名称</el-button>
 						<el-button type="text" size="small" @click="updateStore(scope.row.template_id)">修改可见分组</el-button>
 						<el-button type="text" size="small" @click="look(scope.row.template_id)">查看</el-button>
 						<el-button type="text" v-if="scope.row.using == 0" size="small" @click="setting(scope.row.template_id,scope.row.using)">停用</el-button>
@@ -51,6 +52,7 @@
 			</el-pagination>
 		</div>
 	</el-card>
+	<!-- 修改可见分组 -->
 	<el-dialog title="修改可见分组" center width="50%" :visible.sync="updateShop">
 		<el-checkbox v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
 		<el-checkbox-group v-model="checkList" @change="handleCheckedCitiesChange">
@@ -59,6 +61,18 @@
 		<span slot="footer" class="dialog-footer">
 			<el-button size="small" @click="updateShop = false">取消</el-button>
 			<el-button size="small" type="primary" @click="submit">确 定</el-button>
+		</span>
+	</el-dialog>
+	<!-- 编辑模版名称 -->
+	<el-dialog title="编辑模版名称" width="30%" center :visible.sync="temDialog">
+		<el-form size="small">
+			<el-form-item label="模版名称：">
+				<el-input v-model="template_shop_name" style="width: 150px">
+				</el-input>
+			</el-form-item>
+		</el-form>
+		<span slot="footer" class="dialog-footer">
+			<el-button size="small" type="primary" @click="saveTem">保存</el-button>
 		</span>
 	</el-dialog>
 </div>
@@ -86,6 +100,8 @@
 				checkList:[],				//已选中的可见商家
 				template_id:"",
 				checkAll: false,
+				temDialog:false,
+				template_shop_name:"",		//模版名称
 			}
 		},
 		created(){
@@ -213,6 +229,32 @@
 						this.updateShop = false;
 						//获取列表
 						this.getList();
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
+			},
+			//点击编辑模版名称
+			updateTem(tem_name,id){
+				this.temDialog = true;
+				this.template_shop_name = tem_name;
+				this.template_id = id;
+			},	
+			//确认修改模版名称
+			saveTem(){	
+				if(this.template_shop_name == ''){
+					this.$message.warning('请输入模版名称');
+					return;
+				}
+				let obj = {
+					template_id:this.template_id,
+					template_shop_name:this.template_shop_name
+				}
+				resource.editTemplateName(obj).then(res => {
+					if(res.data.code == 1){
+						this.$message.success(res.data.msg);
+						//获取列表
+						this.getList()
 					}else{
 						this.$message.warning(res.data.msg);
 					}

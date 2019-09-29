@@ -69,6 +69,16 @@
 		<el-input type="text" size="small" style="width: 300px" placeholder="请输入商家名称" v-model="store_name">
 		</el-input>
 	</div>
+	<div class="dialogItem">
+		<div class="itemLabel">聚水潭账号：</div>
+		<el-input type="text" size="small" style="width: 300px" placeholder="请输入聚水潭账号" v-model="jst_account">
+		</el-input>
+	</div>
+	<div class="dialogItem">
+		<div class="itemLabel">聚水潭密码：</div>
+		<el-input type="text" size="small" style="width: 300px" placeholder="请输入聚水潭密码" v-model="jst_password">
+		</el-input>
+	</div>
 	<span slot="footer" class="dialog-footer">
 		<el-button size="small" @click="showDialog = false">取消</el-button>
 		<el-button size="small" type="primary" @click="submit">确 定</el-button>
@@ -105,6 +115,8 @@
 				dataObj:{},					//获取到的信息
 				showDialog:false,			//默认弹框不显示
 				store_name:"",				//创建的商家名称
+				jst_account:"",				//聚水潭账号
+				jst_password:"",			//聚水潭密码
 			}
 		},
 		created(){
@@ -173,7 +185,12 @@
 				if(this.store_name == ""){
 					this.$message.warning('请输入商家名称');
 				}else{
-					resource.addStoreNow({store_name:this.store_name}).then(res => {
+					let obj = {
+						store_name:this.store_name,
+						jst_account:this.jst_account,
+						jst_password:this.jst_password
+					}
+					resource.addStoreNow(obj).then(res => {
 						if(res.data.code == 1){
 							this.$message.success(res.data.msg);
 							this.reload();

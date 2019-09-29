@@ -18,6 +18,12 @@
 					end-placeholder="结束时间">
 				</el-date-picker>
 			</el-form-item>
+			<el-form-item label="代理类型：">
+				<el-select v-model="req.agent_type" filterable placeholder="请选择">
+					<el-option v-for="item in agentList" :key="item.id" :label="item.name" :value="item.id">
+					</el-option>
+				</el-select>
+			</el-form-item>
 			<el-form-item>
 				<el-button type="primary" @click="search">搜索</el-button>
 			</el-form-item>
@@ -26,20 +32,22 @@
 			<el-button type="primary" icon="el-icon-download" size="small" @click="exportUp">导出</el-button>
 		</div>
 		<el-table :data="dataObj.data" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}" :default-sort = "{prop: 'completeTime'}">
-			<el-table-column prop="start_time" label="时间" align="center">
+			<el-table-column prop="happen_time" label="时间" align="center">
 			</el-table-column>
-			<el-table-column prop="task_id" label="任务编号" align="center">
+			<el-table-column prop="task_sn" label="任务编号" align="center">
 			</el-table-column>
-			<el-table-column prop="admin_name" label="商家账号" align="center">
+			<el-table-column prop="store_admin_name" label="商家账号" align="center">
 			</el-table-column>
 			<el-table-column prop="store_name" label="商家名称" align="center">
 			</el-table-column>
-			<el-table-column prop="finished_task_num" label="完成单数" align="center">
+			<el-table-column label="代理类型" align="center">
+				<template slot-scope="scope">
+					<p>{{scope.row.agent_type == '1'?'子代理':'总代理'}}</p>
+				</template>
 			</el-table-column>
-			<el-table-column prop="agent_money" label="代理抽成（元）" align="center">
+			<el-table-column prop="money" label="抽成（元）" align="center">
 			</el-table-column>
-			<el-table-column prop="agent_admin_money" label="总代理抽成（元）" align="center">
-			</el-table-column>
+			
 		</el-table>
 		<div class="page">
 			<el-pagination
@@ -71,8 +79,19 @@
 					name:"",
 					account:"",
 					start_time:"",
-					end_time:""
+					end_time:"",
+					agent_type:"-1"
 				},
+				agentList:[{
+					id:"-1",
+					name:"不限"
+				},{
+					id:'1',
+					name:"子代理"
+				},{
+					id:'2',
+					name:"总代理"
+				}],
 				date:[],
 				dataObj:{},					//获取到的信息
 				

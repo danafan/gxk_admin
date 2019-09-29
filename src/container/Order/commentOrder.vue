@@ -17,6 +17,9 @@
 				<el-form-item label="任务名称：">
 					<el-input v-model="req.task_name" placeholder="请输入任务名称"></el-input>
 				</el-form-item>
+				<el-form-item label="店铺名称：">
+					<el-input v-model="req.shop_name" placeholder="请输入店铺名称"></el-input>
+				</el-form-item>
 				<el-form-item label="任务编号：">
 					<el-input v-model="req.comment_id" placeholder="请输入网店订单号"></el-input>
 				</el-form-item>
@@ -88,7 +91,8 @@
 					task_name:"",
 					comment_id:"",
 					start_time:"",
-					end_time:""
+					end_time:"",
+					shop_name:""
 				},
 				date:[],
 				dataObj:{},					//获取到的信息

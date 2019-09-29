@@ -31,6 +31,12 @@
 				<div class="label">订单量</div>
 				<div class="infoContent">{{infoObj.order_num}}</div>
 			</div>
+			<div class="infoRow">
+				<div class="label">聚水潭账号</div>
+				<div class="infoContent">{{infoObj.jst_account}}</div>
+				<div class="label">聚水潭密码</div>
+				<div class="infoContent">{{infoObj.jst_password}}</div>
+			</div>
 		</div>
 		<div class="tabTitle">
 			<div class="line"></div>

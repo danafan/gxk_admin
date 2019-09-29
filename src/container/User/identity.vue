@@ -11,6 +11,9 @@
 				<el-form-item label="用户信息：">
 					<el-input v-model="req.user_info" placeholder="请输入用户手机号、姓名、身份证皆可查询"></el-input>
 				</el-form-item>
+				<el-form-item label="上级用户：">
+					<el-input v-model="req.invite_phone" placeholder="上级手机号"></el-input>
+				</el-form-item>
 				<el-form-item label="创建时间：">
 					<el-date-picker
 					v-model="date"
@@ -103,6 +106,7 @@
 					size:10,
 					check_status:"",
 					user_info:"",
+					invite_phone:"",
 					upload_begin_time:"",
 					upload_end_time:""
 				},

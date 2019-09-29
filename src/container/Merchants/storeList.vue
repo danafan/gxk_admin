@@ -30,6 +30,16 @@
 			</el-table-column>
 			<el-table-column prop="shop_name" label="店铺名称" align="center">
 			</el-table-column>
+			<el-table-column prop="store_name" label="商家名称" align="center">
+			</el-table-column>
+			<el-table-column prop="task_num" label="已发布任务单数" align="center">
+			</el-table-column>
+			<el-table-column prop="finished_task_num" label="已完成任务单数" align="center">
+			</el-table-column>
+			<el-table-column prop="commission_total" label="消费佣金（元）" align="center">
+			</el-table-column>
+			<el-table-column prop="pay_amount_total" label="付款本金（元）" align="center">
+			</el-table-column>
 			<el-table-column prop="add_name" label="创建人" align="center">
 			</el-table-column>
 			<el-table-column label="店铺状态" align="center">

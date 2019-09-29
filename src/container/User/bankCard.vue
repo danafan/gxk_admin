@@ -25,6 +25,9 @@
 				<el-button type="primary" @click="search">搜索</el-button>
 			</el-form-item>
 		</el-form>
+		<div class="but">
+			<el-button type="primary" icon="el-icon-download" size="small" @click="exportUp">导出</el-button>
+		</div>
 		<el-table :data="dataObj.data" size="small" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}" :default-sort = "{prop: 'completeTime'}">
 			<el-table-column prop="user_phone" label="用户名" align="center">
 			</el-table-column>
@@ -83,6 +86,7 @@
 </style>
 <script>
 	import resource from '../../api/resource.js'
+	import exportUp from '../../api/export.js'
 	export default{
 		data(){
 			return{
@@ -168,6 +172,17 @@
 			rotate(e){
 				this.current += 90;
 				this.$refs.img.style.transform = 'rotate('+this.current+'deg)';
+			},
+			//预约下载
+			exportUp(){
+				var arr = {};
+				for(let a in this.req){
+					if(a != 'page' && a != 'size' && this.req[a] != ''){
+						arr[a] = this.req[a];
+					}
+				}
+				arr.index = 15;
+				exportUp.exportUp(arr)
 			},
 			//审核
 			check(id,status){

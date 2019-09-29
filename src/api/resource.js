@@ -134,6 +134,7 @@ let path = {
 	getaGentwithdRawdetail:'finance/getagentwithdrawdetail',//代理提现详情
 	agentwithdrawcheck:'finance/agentwithdrawcheck',		//代理提现审核
 	userRemark:'user/userremark',							//用户备注
+	editTemplateName:'task/edittemplatename',				//修改模版名称
 
 }				
 export default{
@@ -704,6 +705,10 @@ export default{
 	//用户备注
 	userRemark(params){
 		return http.get(path.userRemark, params)
+	},
+	//修改模版名称
+	editTemplateName(params){
+		return http.post(path.editTemplateName, params)
 	},
 }
 

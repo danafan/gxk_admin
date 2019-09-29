@@ -26,6 +26,15 @@
 				<el-form-item label="订单编号：">
 					<el-input v-model="req.order_id" placeholder="请输入网店订单号"></el-input>
 				</el-form-item>
+				<el-form-item label="旺旺号：">
+					<el-input v-model="req.wangwang" placeholder="请输入旺旺号"></el-input>
+				</el-form-item>
+				<el-form-item label="店铺名称：">
+					<el-input v-model="req.shop_name" placeholder="请输入店铺名称"></el-input>
+				</el-form-item>
+				<el-form-item label="订单编号：">
+					<el-input v-model="req.order_id" placeholder="请输入网店订单号"></el-input>
+				</el-form-item>
 				<el-form-item label="接单账号：">
 					<el-input v-model="req.phone" placeholder="请输入网店订单号"></el-input>
 				</el-form-item>
@@ -125,7 +134,9 @@
 					order_id:"",
 					phone:"",
 					start_datetime:"",
-					end_datetime:""
+					end_datetime:"",
+					wangwang:"",
+					shop_name:""
 				},
 				date:[],
 				dataObj:{},					//获取到的信息

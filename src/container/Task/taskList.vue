@@ -29,6 +29,12 @@
 						<el-option label="无剩余" value="1"></el-option>
 					</el-select>
 				</el-form-item>
+				<el-form-item label="店铺名称：">
+					<el-input v-model="req.shop_name" placeholder="请输入店铺名称"></el-input>
+				</el-form-item>
+				<el-form-item label="任务名称：">
+					<el-input v-model="req.template_shop_name" placeholder="请输入任务名称"></el-input>
+				</el-form-item>
 				<el-form-item label="任务时间：">
 					<el-date-picker
 					v-model="date"
@@ -64,11 +70,9 @@
 			</el-table-column>
 			<el-table-column prop="task_user_name" label="任务类型" align="center">
 			</el-table-column>
-			<el-table-column prop="goods_name" label="商品名称" align="center">
-			</el-table-column>
-			<el-table-column label="佣金/服务费（元）" align="center">
+			<el-table-column label="商品主图" align="center">
 				<template slot-scope="scope">
-					<p>{{scope.row.commission}}/{{scope.row.service_charge}}</p>
+					<el-button v-if="scope.row.goods_img" type="text" size="small" @click="lookImg(scope.row.goods_img)">查看</el-button>
 				</template>
 			</el-table-column>
 			<el-table-column label="任务总数/剩余数量" align="center">
@@ -102,6 +106,10 @@
 		</el-pagination>
 	</div>
 </el-card>
+<!-- 查看商品主图 -->
+<el-dialog title="商品主图" center :visible.sync="showImg" width="60%">
+	<img class="cardimg" :src="cardImg" @click="rotate" ref="img">
+</el-dialog>
 </div>
 </template>
 <style lang="less" scoped>
@@ -113,6 +121,9 @@
 		margin-right: 10px;
 	}
 }
+.cardimg{
+		width: 100%;
+	}
 </style>
 <script>
 	import resource from '../../api/resource.js'
@@ -130,9 +141,14 @@
 					goods_id:"",
 					task_begin_time:"",
 					task_end_time:"",
+					template_shop_name:"",
+					shop_name:""
 				},
 				date:[],
 				dataObj:{},					//获取到的信息
+				showImg:false,
+				current:0,
+				cardImg:""
 			}
 		},
 		created(){
@@ -184,6 +200,17 @@
 						this.$message.warning(res.data.msg);
 					}
 				})
+			},
+			//点击查看商品主图
+			lookImg(img){
+				this.cardImg = "";
+				this.cardImg = img;
+				this.showImg = true;
+			},
+			//点击图片旋转
+			rotate(e){
+				this.current += 90;
+				this.$refs.img.style.transform = 'rotate('+this.current+'deg)';
 			},
 			//操作
 			stop(id){

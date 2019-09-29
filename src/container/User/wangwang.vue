@@ -18,7 +18,9 @@
 					end-placeholder="结束时间">
 				</el-date-picker>
 			</el-form-item>
-
+			<el-form-item label="上级用户：">
+				<el-input v-model="req.invite_phone" placeholder="上级手机号"></el-input>
+			</el-form-item>
 			<el-form-item label="用户名：">
 				<el-input v-model="req.user_name" placeholder="请输入用户名"></el-input>
 			</el-form-item>
@@ -33,6 +35,9 @@
 				<el-button type="primary" @click="search">搜索</el-button>
 			</el-form-item>
 		</el-form>
+		<div class="but">
+			<el-button type="primary" icon="el-icon-download" size="small" @click="exportUp">导出</el-button>
+		</div>
 		<el-table :data="dataObj.data" size="small" border style="width: 100%" align="center" :header-cell-style="{'background':'#f4f4f4'}" :default-sort = "{prop: 'completeTime'}">
 			<el-table-column prop="user_name" label="用户名" align="center">
 			</el-table-column>
@@ -104,6 +109,7 @@
 </style>
 <script>
 	import resource from '../../api/resource.js'
+	import exportUp from '../../api/export.js'
 	export default{
 		data(){
 			return{
@@ -127,6 +133,7 @@
 					page:1,
 					size:10,
 					status:"",
+					invite_phone:"",
 					bind_begin_time:"",
 					bind_end_time:"",
 					user_name:"",
@@ -209,6 +216,17 @@
 						this.$message.warning(res.data.msg);
 					}
 				})
+			},
+			//预约下载
+			exportUp(){
+				var arr = {};
+				for(let a in this.req){
+					if(a != 'page' && a != 'size' && this.req[a] != ''){
+						arr[a] = this.req[a];
+					}
+				}
+				arr.index = 14;
+				exportUp.exportUp(arr)
 			},
 			//审核
 			check(id,status){

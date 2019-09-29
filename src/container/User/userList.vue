@@ -14,6 +14,12 @@
 						</el-option>
 					</el-select>
 				</el-form-item>
+				<el-form-item label="QQ号：">
+					<el-input type="number" v-model="req.qq" placeholder="请输入QQ号"></el-input>
+				</el-form-item>
+				<el-form-item label="微信号：">
+					<el-input v-model="req.wx" placeholder="请输入QQ号"></el-input>
+				</el-form-item>
 				<el-form-item label="注册时间：">
 					<el-date-picker
 					v-model="date1"
@@ -45,6 +51,14 @@
 		<el-table-column prop="phone" label="用户账号" align="center">
 		</el-table-column>
 		<el-table-column prop="realName" label="真实姓名" align="center">
+		</el-table-column>
+		<el-table-column prop="wangwang" label="旺旺号" align="center">
+		</el-table-column>
+		<el-table-column prop="qq" label="QQ号" align="center">
+		</el-table-column>
+		<el-table-column prop="wx" label="微信号" align="center">
+		</el-table-column>
+		<el-table-column prop="zhifubao" label="支付宝账号" align="center">
 		</el-table-column>
 		<el-table-column prop="invite_name" label="上级用户" align="center">
 		</el-table-column>
@@ -217,6 +231,8 @@
 					phone:"",
 					inviter_id:"",
 					job:"",
+					qq:"",
+					wx:"",
 					registeBeginTime:"",
 					registeEndTime:"",
 					jobBeginTime:"",
