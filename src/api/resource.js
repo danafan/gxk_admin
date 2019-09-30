@@ -135,6 +135,7 @@ let path = {
 	agentwithdrawcheck:'finance/agentwithdrawcheck',		//代理提现审核
 	userRemark:'user/userremark',							//用户备注
 	editTemplateName:'task/edittemplatename',				//修改模版名称
+	agentList2:'agent/agentlist2',							//代理列表（不分页）
 
 }				
 export default{
@@ -709,6 +710,10 @@ export default{
 	//修改模版名称
 	editTemplateName(params){
 		return http.post(path.editTemplateName, params)
+	},
+	//代理列表（不分页）
+	agentList2(params){
+		return http.get(path.agentList2, params)
 	},
 }
 

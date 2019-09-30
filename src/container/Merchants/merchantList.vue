@@ -79,6 +79,12 @@
 		<el-input type="text" size="small" style="width: 300px" placeholder="请输入聚水潭密码" v-model="jst_password">
 		</el-input>
 	</div>
+	<div class="dialogItem">
+		<div class="itemLabel">所属代理：</div>
+		<el-radio-group v-model="agent_id">
+			<el-radio style="margin-bottom: 10px;" :label="item.id" v-for="item in agentList">{{item.name}}</el-radio>
+		</el-radio-group>
+	</div>
 	<span slot="footer" class="dialog-footer">
 		<el-button size="small" @click="showDialog = false">取消</el-button>
 		<el-button size="small" type="primary" @click="submit">确 定</el-button>
@@ -93,7 +99,7 @@
 	align-items: center;
 	font-size: 14px;
 	.itemLabel{
-		width: 100px;
+		width: 150px;
 		font-weight: bold;
 	}
 }
@@ -114,14 +120,18 @@
 				date:[],
 				dataObj:{},					//获取到的信息
 				showDialog:false,			//默认弹框不显示
+				agentList:[],				//所有代理的列表
 				store_name:"",				//创建的商家名称
 				jst_account:"",				//聚水潭账号
 				jst_password:"",			//聚水潭密码
+				agent_id:"",				//选中的代理id
 			}
 		},
 		created(){
 			//获取列表
 			this.getList();
+			//获取所有代理列表
+			this.agentList2();
 		},
 		watch:{
 			date:function(n){
@@ -131,6 +141,16 @@
 		},
 		inject:['reload'],
 		methods:{
+			//获取所有代理列表
+			agentList2(){
+				resource.agentList2().then(res => {
+					if(res.data.code == 1){
+						this.agentList = res.data.data;
+					}else{
+						this.$message.warning(res.data.msg);
+					}
+				})
+			},
 			//分页
 			handleSizeChange(val) {
 				this.req.pagesize = val;
@@ -188,7 +208,8 @@
 					let obj = {
 						store_name:this.store_name,
 						jst_account:this.jst_account,
-						jst_password:this.jst_password
+						jst_password:this.jst_password,
+						agent_id:this.agent_id
 					}
 					resource.addStoreNow(obj).then(res => {
 						if(res.data.code == 1){

@@ -8,6 +8,9 @@
 				<el-form-item label="上级用户：">
 					<el-input v-model="req.inviter_id" placeholder="请输入用户名"></el-input>
 				</el-form-item>
+				<el-form-item label="旺旺号：">
+					<el-input v-model="req.wangwang" placeholder="请输入旺旺号"></el-input>
+				</el-form-item>
 				<el-form-item label="身份：">
 					<el-select v-model="req.job" filterable placeholder="请选择">
 						<el-option v-for="item in jobList" :key="item.job_id" :label="item.job_name" :value="item.job_id">
@@ -230,6 +233,7 @@
 					size:10,
 					phone:"",
 					inviter_id:"",
+					wangwang:"",
 					job:"",
 					qq:"",
 					wx:"",
